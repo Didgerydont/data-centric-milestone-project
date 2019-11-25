@@ -69,3 +69,9 @@ Design Data base layout. What will be our primary keys, how will a search functi
 
 # data-centric-milestone-project
 # data-centric-milestone-project
+
+
+
+##### Tech used
+
+Installed : Flask, os, pymongo, dnspython
