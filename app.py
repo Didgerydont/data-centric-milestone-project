@@ -8,9 +8,9 @@ app = Flask(__name__)
 
 #DBS_NAME = 'my_data_project'
 app.config["MONGO_DBNAME"] = "my_data_project"
-app.config["MONGO_URI"] = os.getenv('MONGO_URI')
+MONGODB_URI = os.getenv("MONGO_URI")
 
-mongo = PyMongo(app)
+#mongo = PyMongo(app)
 
 app.route('/')
 def hello():
@@ -18,6 +18,6 @@ def hello():
 
 
 if __name__ == '__main__':
-    app.run(host=os.environ.get('IP'),
-        port=int(os.environ.get('PORT')),
-        debug=True)
+    app.run(host='0.0.0.0',
+    port=int('8080'),
+    debug=True)
