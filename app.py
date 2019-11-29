@@ -1,6 +1,6 @@
 import os
 import pymongo
-from flask import Flask
+from flask import Flask, render_template
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
