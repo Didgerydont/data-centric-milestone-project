@@ -12,7 +12,7 @@ MONGODB_URI = os.getenv("MONGO_URI")
 
 #mongo = PyMongo(app)
 
-app.route('/')
+app.route("/")
 def hello():
     return "Hello World.... again!"
 
