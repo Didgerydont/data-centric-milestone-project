@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 #DBS_NAME = 'my_data_project'
 app.config["MONGO_DBNAME"] = "my_data_project"
-MONGODB_URI = os.getenv("MONGO_URI")
+MONGO_URI = os.getenv("MONGO_URI")
 
 #mongo = PyMongo(app)
 
