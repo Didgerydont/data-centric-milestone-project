@@ -13,13 +13,13 @@ MONGO_URI = os.getenv("MONGO_URI")
 #mongo = PyMongo(app)
 
 @app.route("/")
-@app.route("/index.html")
+@app.route("/index")
 def hello():
-    return "Hello World.... again!"
+    return render_template('index.html')
 
-@app.route("/about.html")
-def hello():
-    return "Hello World.... again!"
+##@app.route("/about")
+##def test():
+##  return render_template('about.html')
 
 
 
