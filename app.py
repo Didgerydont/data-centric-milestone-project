@@ -6,9 +6,9 @@ from bson.objectid import ObjectId
 
 app = Flask(__name__)
 
-#DBS_NAME = 'my_data_project'
-#app.config["MONGO_DBNAME"] = "my_data_project"
-#MONGO_URI = os.getenv("MONGO_URI")
+DBS_NAME = 'my_data_project'
+app.config["MONGO_DBNAME"] = "my_data_project"
+MONGO_URI = os.getenv("MONGO_URI")
 
 #mongo = PyMongo(app)
 
