@@ -1,29 +1,38 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        
-        
-        
-        
-        
-        
-        <title>Recipe hub</title>
-    </head>
-    <body>
-        <header>
-            <h1 class="title">Recipe hub</h1>
-            <p class="sub-heading">A place for you and your friends to share recipes</p>
-            <!-- nav element here --> 
-        </header>
-        <main>
-            <div class="container">
-                {% block content %} {% endblock %}
-            </div>
-        </main>
-        
-        
-        <footer>
-            
-        </footer>
-    </body>
+
+<head>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Optimize for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+    <title>Recipe hub</title>
+</head>
+
+<body>
+    <header>
+        <h1 class="title">Recipe hub</h1>
+        <p class="sub-heading">A place for you and your friends to share recipes</p>
+        <!-- nav element here -->
+    </header>
+    <main>
+        <div class="container">
+            {% block content %} {% endblock %}
+        </div>
+    </main>
+
+
+    <footer>
+
+    </footer>
+    
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
 </html>
