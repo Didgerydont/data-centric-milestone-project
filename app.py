@@ -6,24 +6,21 @@ from bson.objectid import ObjectId
 
 app = Flask(__name__)
 
-DBS_NAME = 'my_data_project'
 app.config["MONGO_DBNAME"] = "my_data_project"
-MONGO_URI = os.getenv("MONGO_URI")
-
+app.config["MONGODB_URI"] = os.getenv("MONGO_URI")
 mongo = PyMongo(app)
+
 
 @app.route("/")
 @app.route("/index")
 def hello():
     return render_template('index.html')
 
-##@app.route("/about")
-##def test():
-##  return render_template('about.html')
 
-@app.route('/get_categories')
-def get_categories():
-    return render_template('categories.html', tasks=mongo.db.categories.find())
+@app.route('/readrecipe')
+def get_recipe():
+    return render_template('readrecipe.html', 
+    recipes=mongo.db.dish_names.find())
     
 
 if __name__ == '__main__':
