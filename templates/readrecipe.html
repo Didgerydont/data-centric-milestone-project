@@ -1,15 +1,15 @@
 {% extends 'base.html'%} {% block content %}
-
-<ul>
-    {% for dish in dish_names %} 
-        <li>
-            {{dish.dish_names}} 
-        </li>
-        
+<div class="container">
+    <ul>
+        {% for dish in dish_names %} 
+            <li>
+                {{dish.dish_name}} 
+            </li>
         
         {% endfor %}
 
-</ul>
+    </ul>
+</div>
 
 
 {% endblock %}
