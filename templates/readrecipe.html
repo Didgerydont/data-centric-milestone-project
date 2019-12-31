@@ -1,9 +1,10 @@
-{% extends 'base.html'%} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
 <div class="container">
     <ul>
         {% for recipe in recipes %} 
             <li>
-                {{recipes.title}}
+                {{recipe.title}}
                 
             </li>
         
