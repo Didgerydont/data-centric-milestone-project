@@ -9,8 +9,8 @@ if path.exists("env.py"):
 
 app = Flask(__name__)
 
-app.config["MONGO_DBNAME"] = "my_data_project"
-MONGO_URI = os.environ.get('MONGO_URI') 
+app.config["MONGO_DBNAME"] = os.environ.get('my_data_project')
+app.config["MONGO_URI"] = os.environ.get('MONGO_URI')
 mongo = PyMongo(app)
 
 
@@ -26,7 +26,7 @@ def get_recipe():
     recipes=mongo.db.recipes.find())
     
 
-if __name__ == '__main__':
-    app.run(host=os.getenv('IP'),
-        port=int(os.getenv('PORT')), 
-        debug=False)
+if __name__ == "__main__":
+    app.run(host=os.environ.get('IP'),
+        port=int(os.environ.get('PORT')),
+        debug=True)
