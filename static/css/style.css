@@ -1,3 +1,5 @@
+/* Navbar*/
+
 /* drop down collapsible*/
 
 .dropdown-button:hover{
@@ -5,8 +7,14 @@
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
 }
 
+dropdown-button{
+    padding: 5px;
+
+}
 
 /* menu options*/
+
+
 .material-icons{
-    margin: 5px, 15px, 5px;
+    padding: 10px;
 }
