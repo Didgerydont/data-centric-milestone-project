@@ -1,6 +1,12 @@
 /* drop down collapsible*/
 
 .dropdown-button:hover{
-    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+
+/* menu options*/
+.material-icons{
+    margin: 5px, 15px, 5px;
 }
