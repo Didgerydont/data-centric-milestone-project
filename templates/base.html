@@ -18,13 +18,6 @@
 <body>
     <header>
         <!-- nav element here -->
-        <ul id="dropdown1" class="right dropdown-content show-on-medium-and-down">
-            <li><a href="{{url_for('get_recipe')}}">Find a Recipe</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Placeholder</a></li>
-            <li class="divider"></li>
-            <li><a href="#!">three</a></li>
-        </ul>
         <nav>
             <div class="nav-wrapper">
                 <a href="#" class="brand-logo">Recipe Hub</a>
@@ -32,6 +25,14 @@
                     <li><a href="{{url_for('get_recipe')}}">Find a Recipe</a></li>
                     <li><a href="#">Placeholder</a></li>
                     <li><a href="#">Placeholder</a></li>
+                </ul>
+                <a class='dropdown-trigger right hide-on-large-only dropdown-button' href='#' data-target='dropdown1'><i class="material-icons">menu</i></a>
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="{{url_for('get_recipe')}}">Find a Recipe</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">Placeholder</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#!">Placeholder</a></li>
                 </ul>
             </div>
         </nav>
@@ -49,11 +50,11 @@
     </footer>
     
     <!-- Compiled and minified JavaScript -->
-    <script
+    <!--<script
         src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
         crossorigin="anonymous">
-    </script>
+    </script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
