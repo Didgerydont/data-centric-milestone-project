@@ -11,6 +11,7 @@ app = Flask(__name__)
 
 app.config["MONGO_DBNAME"] = os.environ.get('my_data_project')
 app.config["MONGO_URI"] = os.environ.get('MONGO_URI')
+app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY')
 mongo = PyMongo(app)
 
 username = mongo.db.users.find()
@@ -36,7 +37,7 @@ def register():
             hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
             users.insert({'name' : request.form['username'], 'password' : hashpass})
             session['username'] = request.form['username']
-            return redirect(url_for('index'))
+            return redirect(url_for('login'))
 
         return 'Someone already uses that name. Try another'
 
