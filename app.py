@@ -24,7 +24,7 @@ def home():
 
 @app.route("/login")
 def login():
-    return render_template('user_management.html')
+    return render_template('login.html')
 
 @app.route("/register", methods=['POST', 'GET'])
 def register():
@@ -32,10 +32,15 @@ def register():
         users=mongo.db.users
         existing_user = users.find_one({'name': request.form['username']})
 
-    if existing_user == None:
-        hashpash = bcrypt.hashpw(request.form[''])
+        if existing_user == None:
+            hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
+            users.insert({'name' : request.form['username'], 'password' : hashpass})
+            session['username'] = request.form['username']
+            return redirect(url_for('index'))
 
-    return ''
+        return 'Someone already uses that name. Try another'
+
+    return render_template('register.html')
 
 
 @app.route('/readrecipe')
