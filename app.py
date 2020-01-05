@@ -22,6 +22,11 @@ def home():
     return render_template('index.html')
 
 # User login
+
+@app.route('/login_landing')
+def login_landing():
+    return render_template('login.html')
+
 @app.route("/login", methods=['POST'])
 def login():
     users=mongo.db.users
@@ -29,14 +34,14 @@ def login():
     if user_login:
         if bcrypt.hashpw(request.form['pass'].encode('utf-8'), user_login['password'].encode('utf-8')) == user_login['password'].encode('utf-8'):
             session['username'] = request.form['username']
-            return redirect(url_for('login_successful'))
+            return redirect(url_for('login_success'))
 
     return 'Invalid username/password combination'
 
-@app.route("/login_successful")
-def login_sucess():
+@app.route("/login_success")
+def login_success():
     if 'username' in session:
-        return "You are logged in as " + session['username']
+        return render_template('login_success.html')
 
 # User registration
 @app.route("/register", methods=['POST', 'GET'])
@@ -49,7 +54,7 @@ def register():
             hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
             users.insert({'user_name' : request.form['username'], 'password' : hashpass})
             session['username'] = request.form['username']
-            return redirect(url_for('index'))
+            return redirect(url_for('login_success'))
 
         return 'Someone already uses that name. Try another'
 
