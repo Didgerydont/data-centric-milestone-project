@@ -19,8 +19,6 @@ username = mongo.db.users.find()
 @app.route("/")
 @app.route("/index")
 def home():
-    if 'username' in session:
-        return "You are logged in as " + session['username']
     return render_template('index.html')
 
 # User login
@@ -31,11 +29,14 @@ def login():
     if user_login:
         if bcrypt.hashpw(request.form['pass'].encode('utf-8'), user_login['password'].encode('utf-8')) == user_login['password'].encode('utf-8'):
             session['username'] = request.form['username']
-            return redirect(url_for('index'))
+            return redirect(url_for('login_successful'))
 
     return 'Invalid username/password combination'
 
-
+@app.route("/login_successful")
+def login_sucess():
+    if 'username' in session:
+        return "You are logged in as " + session['username']
 
 # User registration
 @app.route("/register", methods=['POST', 'GET'])
