@@ -23,21 +23,32 @@ def home():
         return "You are logged in as " + session['username']
     return render_template('index.html')
 
-@app.route("/login")
+# User login
+@app.route("/login", methods=['POST'])
 def login():
-    return render_template('login.html')
+    users=mongo.db.users
+    user_login = users.find_one({'user_name': request.form['username']})
+    if user_login:
+        if bcrypt.hashpw(request.form['pass'].encode('utf-8'), user_login['password'].encode('utf-8')) == user_login['password'].encode('utf-8'):
+            session['username'] = request.form['username']
+            return redirect(url_for('index'))
 
+    return 'Invalid username/password combination'
+
+
+
+# User registration
 @app.route("/register", methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
         users=mongo.db.users
-        existing_user = users.find_one({'name': request.form['username']})
+        existing_user = users.find_one({'user_name': request.form['username']})
 
         if existing_user == None:
-            hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
-            users.insert({'name' : request.form['username'], 'password' : hashpass})
+            hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
+            users.insert({'user_name' : request.form['username'], 'password' : hashpass})
             session['username'] = request.form['username']
-            return redirect(url_for('login'))
+            return redirect(url_for('index'))
 
         return 'Someone already uses that name. Try another'
 
