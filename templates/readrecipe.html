@@ -13,19 +13,43 @@
         </div>
     </nav>
 </div>
-<div class="container">
-    <ul>
-        {% for recipe in recipes %} 
-        {{recipe.title}}
-            <li>
-                {{recipe.description}}
-                
-            </li>
-        
-        {% endfor %}
+<div class="row">
+    <div class="container">
+        <ul>
+            {% for recipe in recipes %} 
+            {{recipe.title}}
+                <li>
+                    {{recipe.description}}
+                    {{recipe.method}}
+                    {{recipe.ingredients}}
+                    {{recipe.meal}}
+                    {{recipe.serves}}
+                    {{recipe.prep_time}}
+                    {{recipe.country_of_origin}}
+                    {{recipe.user_name}}
+                    {{recipe.last_modified}}
 
-    </ul>
+                    
+                </li>
+            
+            {% endfor %}
+        </ul>
+    </div>
 </div>
+<div class="row">
+    <div class="container">    
+        <ul class="collapsible">
+        {% for recipe in recipes %} 
+            <li>
+                <div class="collapsible-header"><i class="material-icons">expand_more</i>First</div>
+                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+            </li>
+        {% endfor %}
+        </ul>
+
+    </div>
+</div>
+
 
 
 {% endblock %}

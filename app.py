@@ -82,8 +82,8 @@ def search_bar():
 def search_results(search_text):
     search_results = mongo.db.recipes.find(
         {'$text': {'$search': search_text}})
-    ## for item in search_results:
-    ##    print("Search results: ", item)
+  
+  
     return render_template("readrecipe.html", recipes=search_results)
 
 
