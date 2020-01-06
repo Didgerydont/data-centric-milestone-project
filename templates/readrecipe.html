@@ -13,36 +13,29 @@
         </div>
     </nav>
 </div>
-<div class="row">
-    <div class="container">
-        <ul>
-            {% for recipe in recipes %} 
-            {{recipe.title}}
-                <li>
-                    {{recipe.description}}
-                    {{recipe.method}}
-                    {{recipe.ingredients}}
-                    {{recipe.meal}}
-                    {{recipe.serves}}
-                    {{recipe.prep_time}}
-                    {{recipe.country_of_origin}}
-                    {{recipe.user_name}}
-                    {{recipe.last_modified}}
 
-                    
-                </li>
-            
-            {% endfor %}
-        </ul>
-    </div>
-</div>
 <div class="row">
     <div class="container">    
         <ul class="collapsible">
         {% for recipe in recipes %} 
             <li>
-                <div class="collapsible-header"><i class="material-icons">expand_more</i>First</div>
-                <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                <div class="collapsible-header"><i class="material-icons">expand_more</i>{{recipe.title}}</div>
+                    <div class="collapsible-body">
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="card">
+                                    <div class="card-image">
+                                        <span class="card-title">{{recipe.title}}</span>
+                                        <a class="btn-floating halfway-fab waves-effect waves-light purple"><i class="material-icons">add</i></a>
+                                    </div>
+                                    <div class="card-content">
+                                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </di    v>
             </li>
         {% endfor %}
         </ul>
