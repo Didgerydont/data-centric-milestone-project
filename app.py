@@ -61,12 +61,36 @@ def register():
 
     return render_template('register.html')
 
+# CRUD
 
 @app.route('/readrecipe')
 def get_recipe():
     return render_template('readrecipe.html', 
     recipes=mongo.db.recipes.find())
     
+
+# Search bar
+@app.route('/search_bar/', methods=["POST"])
+def search_bar():
+    search_term = request.form['search_text']
+    if (search_term != ""):
+        return redirect(url_for('search_results', search_text=search_term))
+    else:
+        return render_template("recipes.html", recipes=mongo.db.recipes.find())
+
+@app.route('/search_results/<search_text>')
+def search_results(search_text):
+    search_results = mongo.db.recipes.find(
+        {'$text': {'$search': search_text}})
+    ## for item in search_results:
+    ##    print("Search results: ", item)
+    return render_template("search-findings.html", recipes=search_results)
+
+
+
+
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',
