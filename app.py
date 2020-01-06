@@ -84,7 +84,7 @@ def search_results(search_text):
         {'$text': {'$search': search_text}})
     ## for item in search_results:
     ##    print("Search results: ", item)
-    return render_template("search-findings.html", recipes=search_results)
+    return render_template("readrecipe.html", recipes=search_results)
 
 
 
