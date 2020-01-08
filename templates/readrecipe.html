@@ -15,27 +15,77 @@
 </div>
 
 <div class="row">
-    <div class="container">    
+    <div class="container find-recipe-container">    
         <ul class="collapsible">
         {% for recipe in recipes %} 
             <li>
-                <div class="collapsible-header"><i class="material-icons">expand_more</i>{{recipe.title}}</div>
+                <div class="collapsible-header title-header"><i class="material-icons">expand_more</i><h3 class="recipe-header">{{recipe.title}}</h3></div>
                     <div class="collapsible-body">
                         <div class="row">
                             <div class="col s12">
                                 <div class="card">
                                     <div class="card-image">
-                                        <span class="card-title">{{recipe.title}}</span>
-                                        <a class="btn-floating halfway-fab waves-effect waves-light purple"><i class="material-icons">add</i></a>
                                     </div>
-                                    <div class="card-content">
-                                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                                    <div class="card-content recipe-description">
+                                        <h4 class="find-recipe-headers">Description</h4>
+                                        <p>{{recipe.description}}</p>
+
                                     </div>
+                                    <br>    
+                                    <div class="card-content recipe-method">
+                                        <h4 class="find-recipe-headers">Method</h4>
+                                        <p>{{recipe.method}}</p>
+
+                                    </div>
+                                    <br>
+                                    <div class="card-content recipe-ingredients">
+                                        <h4 class="find-recipe-headers">Ingredients</h4>
+                                        <p>{{recipe.ingredients}}</p>
+
+                                    </div>
+                                    <br>
+                                    <div class="card-content recipe-meal">
+                                        <h4 class="find-recipe-headers">Meal Type</h4>
+                                        <p>{{recipe.meal}}</p>
+
+                                    </div>
+                                    <br>
+                                    <div class="card-content recipe-serves">
+                                        <h4 class="find-recipe-headers">Servings</h4>
+                                        <p>{{recipe.serves}}</p>
+
+                                    </div>
+                                    <br>
+                                    <div class="card-content recipe-prep-time">
+                                        <h4 class="find-recipe-headers">Preperation Time</h4>
+                                        <p>{{recipe.prep_time}}</p>
+
+                                    </div>
+                                    <br>
+                                    <div class="card-content recipe-cooking-time">
+                                        <h4 class="find-recipe-headers">Cooking Time</h4>
+                                        <p>{{recipe.cooking_time}}</p>
+
+                                    </div>
+                                    <br>
+                                    <div class="card-content recipe-country-of-origin">
+                                        <h4 class="find-recipe-headers">Country of Origin</h4>
+                                        <p>{{recipe.country_of_origin}}</p>
+
+                                    </div>
+                                    <br>
+                                    <div class="card-content recipe-user-name">
+                                        <h4 class="find-recipe-headers">Uploaded by</h4>
+                                        <p>{{recipe.user_name}}</p>
+
+                                    </div>
+                                    <br>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                </di    v>
+                </div>
             </li>
         {% endfor %}
         </ul>

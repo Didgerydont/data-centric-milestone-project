@@ -6,11 +6,26 @@
 }
 
 /*text*/
-.text{
-    
+p{
+    font-family: 'Crimson Text', serif;
+    font-size: 23px;
 }
 
 
+/*HEADERS*/
+.collapsible-header{
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.title-header {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 /* Navbar*/
 
 /* drop down collapsible*/

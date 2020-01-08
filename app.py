@@ -61,14 +61,17 @@ def register():
 
     return render_template('register.html')
 
-# CRUD
+# -----> CRUD
 
+# Read
 @app.route('/readrecipe')
 def get_recipe():
     return render_template('readrecipe.html', 
     recipes=mongo.db.recipes.find())
     
 
+
+## Come back to Search, must find another as Mongo shell cant be used on this version of gitpod
 # Search bar
 @app.route('/search_bar/', methods=["POST"])
 def search_bar():
