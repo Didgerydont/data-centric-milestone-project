@@ -4,7 +4,7 @@ from flask import Flask, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 import bcrypt
-import datetime
+from datetime import datetime
 if os.path.exists("env.py"):
     import env
 
@@ -32,8 +32,9 @@ def login_landing():
 def login():
     users=mongo.db.users
     user_login = users.find_one({'user_name': request.form['username']})
+
     if user_login:
-        if bcrypt.hashpw(request.form['pass'].encode('utf-8'), user_login['password'].encode('utf-8')) == user_login['password'].encode('utf-8'):
+        if bcrypt.hashpw(request.form['pass'].encode('utf-8'), user_login['password']) == user_login['password']:
             session['username'] = request.form['username']
             return redirect(url_for('login_success'))
 
