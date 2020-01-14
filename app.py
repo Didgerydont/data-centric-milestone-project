@@ -5,6 +5,9 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 import bcrypt
 from datetime import datetime
+from wtforms import StringField, IntegerField, SelectField, SubmitField
+from wtforms.validators import InputRequired, URL, ValidationError
+from flask_wtf import FlaskForm
 if os.path.exists("env.py"):
     import env
 
@@ -17,6 +20,23 @@ mongo = PyMongo(app)
 
 username = mongo.db.users.find()
 
+class createRecipe(FlaskForm):
+    recipe_title = StringField('title', validators=[InputRequired()])
+    recipe_description = StringField('description', validators=[InputRequired()])
+    recipe_method = StringField('method', validators=[InputRequired()])
+    recipe_ingredients = StringField('ingredients', validators=[InputRequired()])
+    recipe_meal_type = StringField('meal_type', validators=[InputRequired()])
+    recipe_serves = IntegerField('serves', validators=[InputRequired()])
+    recipe_preptime = SelectField('prep', choices=[('0-30m', '0-30 minutes'),
+        ('30-60','30-60 minutes'), ('60-90', '60-90 minutes'),
+        ('90+', '90+ minutes')] ,validators=[InputRequired()])
+    recipe_cooktime = SelectField('cooking_time', choices=[('0-30', '0-30 minutes'),
+        ('30-60','30-60 minutes'), ('60-90', '60-90 minutes'),
+        ('90+', '90+ minutes')] ,validators=[InputRequired()])
+    recipe_origin = StringField('origin', validators=[InputRequired()])
+
+
+# Home
 @app.route("/")
 @app.route("/index")
 def home():
@@ -64,7 +84,13 @@ def register():
 
 # -----> CRUD
 
-# Read
+# Create
+@app.route('add_recipe', methods=['GET', 'POST'])
+def add_recipe():
+    form = createRecipe(request.form)
+    return render_template('addrecipe.html', form=form)
+
+# Read --> Shows all recipes as a directory. 
 @app.route('/readrecipe')
 def get_recipe():
     return render_template('readrecipe.html', 

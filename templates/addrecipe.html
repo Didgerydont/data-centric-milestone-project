@@ -1,6 +1,29 @@
 {% extends 'base.html'%} {% block content %}
 
-<p>addrecipe.html  will go here</p>
+
+<div class="container ">
+    <h2 class="center">Add a new recipe to the the collection</h2>
+</div>
+<div class="container">
+    <div class="add-recipe-container">
+        <form method="POST" action="{{url_for('add_recipe')}}">
+            {{ form.csrf_token }}
+            <h4 class="form-header center">Insert the details of your new recipe below</h4>
+            <ul class="add-recipe-form">
+                <li>{{ form.title }}</li>
+                <li>{{ form.title }}</li>
+                <li>{{ form.title }}</li>
+                <li>{{ form.title }}</li>
+                <li>{{ form.title }}</li>
+                <li>{{ form.title }}</li>
+                
+                
+            </ul>
+            
+        
+        </form>
+    </div>
+</div>
 
 
 {% endblock %}
