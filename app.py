@@ -2,6 +2,7 @@ import os
 import pymongo
 import time
 from flask import Flask, render_template, redirect, request, url_for, session
+from flask_login import LoginManager, UserMixin
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 import bcrypt
@@ -11,13 +12,25 @@ from wtforms.validators import InputRequired, URL, ValidationError
 from flask_wtf import FlaskForm
 if os.path.exists("env.py"):
     import env
-
+#app configuration
 app = Flask(__name__)
 
 app.config["MONGO_DBNAME"] = os.environ.get('my_data_project')
 app.config["MONGO_URI"] = os.environ.get('MONGO_URI')
 app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY')
 mongo = PyMongo(app)
+
+#Flask-login config
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
+
+
+
 
 username = mongo.db.users.find()
 
