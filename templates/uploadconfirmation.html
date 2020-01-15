@@ -1,8 +1,18 @@
-{% extends base.html %} {% block content %}
-<h2>Recipe added successfully</h2>
-<a href="{{ url_for('get_recipe')}}">Back to the directory?</a>
-<a href="{{ url_for('add_recipe')}}">Add another?</a>
-<a href="">Log out</a>
-
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+    <div class="heading">
+        <h2 class="center">Recipe added successfully</h2>
+    </div>
+    <div class="anchor-div center">
+        <a href="{{ url_for('get_recipe')}}">Back to the directory?</a>
+    </div>
+    
+    <div class="anchor-div center">
+        <a href="{{ url_for('add_recipe')}}">Add another?</a>
+    </div>
+    <div class="anchor-div center">
+        <a href="#">Log out</a>
+    </div>
+</div>
 
 {% endblock %}

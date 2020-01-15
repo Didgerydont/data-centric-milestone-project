@@ -3,7 +3,7 @@
 <div class="row">
     <nav class="-search-bar">
         <div class="nav-wrapper #f0f4c3 lime lighten-4">
-            <form id="search-form" action="{{ url_for('search_bar') }}" method="POST" class="col s12">
+            <form id="search-form" action="" method="POST" class="col s12">
             <div class="input-field">
                     <input class="search-bar" type="search" name="search_text" placeholder="Looking for something in particular?" required>
                         <i class="material-icons" id="sendForm" for="submit-form">search</i>
@@ -16,7 +16,7 @@
 
 <div class="row">
     <div class="container find-recipe-container">
-        <h2></h2>  
+        <h2 class="center">Recipe Directory</h2>  
         <ul class="collapsible">
         {% for recipe in recipes %} 
             <li>
