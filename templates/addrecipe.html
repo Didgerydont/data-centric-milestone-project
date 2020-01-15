@@ -6,18 +6,23 @@
 </div>
 <div class="container">
     <div class="add-recipe-container">
-        <form method="POST" action="{{url_for('add_recipe')}}">
+        <form method="POST" action="{{ url_for('add_recipe') }}">
             {{ form.csrf_token }}
             <h4 class="form-header center">Insert the details of your new recipe below</h4>
             <ul class="add-recipe-form">
-                <li>{{ form.title }}</li>
-                <li>{{ form.title }}</li>
-                <li>{{ form.title }}</li>
-                <li>{{ form.title }}</li>
-                <li>{{ form.title }}</li>
-                <li>{{ form.title }}</li>
-                
-                
+                <li class="add-recipe-li">{{ form.recipe_title.label }} {{ form.recipe_title }}</li>
+                <li class="add-recipe-li">{{ form.recipe_description.label }} {{ form.recipe_description }}</li>
+                <li class="add-recipe-li">{{ form.recipe_method.label }} {{ form.recipe_method }}</li>
+                <li class="add-recipe-li">{{ form.recipe_ingredients.label }} {{ form.recipe_ingredients }}</li>
+                <li class="add-recipe-li">{{ form.recipe_meal_type.label }} {{ form.recipe_meal_type }}</li>
+                <li class="add-recipe-li">{{ form.recipe_serves.label }} {{ form.recipe_serves }}</li>
+                <li class="add-recipe-li">{{ form.recipe_preptime.label }} {{ form.recipe_preptime }}</li>
+                <li class="add-recipe-li">{{ form.recipe_cooktime.label }} {{ form.recipe_cooktime }}</li>
+                <li class="add-recipe-li">{{ form.recipe_origin.label }} {{ form.recipe_origin }}</li>
+                <input type="submit" value="Submit">
+                {% for error in form.errors %}
+                    <li style="color:red">{{ error }}</li>
+                {% endfor %}
             </ul>
             
         

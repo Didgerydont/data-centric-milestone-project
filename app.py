@@ -20,20 +20,19 @@ mongo = PyMongo(app)
 
 username = mongo.db.users.find()
 
+user_present = False # remember if user has logged in. 
+
 class createRecipe(FlaskForm):
-    recipe_title = StringField('title', validators=[InputRequired()])
-    recipe_description = StringField('description', validators=[InputRequired()])
-    recipe_method = StringField('method', validators=[InputRequired()])
-    recipe_ingredients = StringField('ingredients', validators=[InputRequired()])
-    recipe_meal_type = StringField('meal_type', validators=[InputRequired()])
-    recipe_serves = IntegerField('serves', validators=[InputRequired()])
-    recipe_preptime = SelectField('prep', choices=[('0-30m', '0-30 minutes'),
-        ('30-60','30-60 minutes'), ('60-90', '60-90 minutes'),
-        ('90+', '90+ minutes')] ,validators=[InputRequired()])
-    recipe_cooktime = SelectField('cooking_time', choices=[('0-30', '0-30 minutes'),
-        ('30-60','30-60 minutes'), ('60-90', '60-90 minutes'),
-        ('90+', '90+ minutes')] ,validators=[InputRequired()])
-    recipe_origin = StringField('origin', validators=[InputRequired()])
+    
+    recipe_title = StringField('Title', validators=[InputRequired()])
+    recipe_description = StringField('Description', validators=[InputRequired()])        
+    recipe_method = StringField('Method', validators=[InputRequired()])
+    recipe_ingredients = StringField('Ingredients', validators=[InputRequired()])
+    recipe_meal_type = StringField('Meal Type', validators=[InputRequired()])
+    recipe_serves = IntegerField('Serves', validators=[InputRequired()])
+    recipe_preptime = StringField('Preperation',validators=[InputRequired()])
+    recipe_cooktime = StringField('Cooking Time', validators=[InputRequired()])
+    recipe_origin = StringField('Country of Origin', validators=[InputRequired()])
 
 
 # Home
@@ -56,6 +55,7 @@ def login():
     if user_login:
         if bcrypt.hashpw(request.form['pass'].encode('utf-8'), user_login['password']) == user_login['password']:
             session['username'] = request.form['username']
+            user_present = True
             return redirect(url_for('login_success'))
 
     return 'Invalid username/password combination'
@@ -85,7 +85,7 @@ def register():
 # -----> CRUD
 
 # Create
-@app.route('add_recipe', methods=['GET', 'POST'])
+@app.route('/add_recipe', methods=['GET', 'POST'])
 def add_recipe():
     form = createRecipe(request.form)
     return render_template('addrecipe.html', form=form)
@@ -100,27 +100,21 @@ def get_recipe():
 
 ## Come back to Search, must find another as Mongo shell cant be used on this version of gitpod
 # Search bar
-@app.route('/search_bar/', methods=["POST"])
-def search_bar():
-    search_term = request.form['search_text']
-    if (search_term != ""):
-        return redirect(url_for('search_results', search_text=search_term))
-    else:
-        return render_template("recipes.html", recipes=mongo.db.recipes.find())
+#@app.route('/search_bar/', methods=["POST"])
+#def search_bar():
+#    search_term = request.form['search_text']
+#    if (search_term != ""):
+#        return redirect(url_for('search_results', search_text=search_term))
+#    else:
+#        return render_template("recipes.html", recipes=mongo.db.recipes.find())
 
-@app.route('/search_results/<search_text>')
-def search_results(search_text):
-    search_results = mongo.db.recipes.find(
-        {'$text': {'$search': search_text}})
+#@app.route('/search_results/<search_text>')
+#def search_results(search_text):
+#    search_results = mongo.db.recipes.find(
+#        {'$text': {'$search': search_text}})
   
   
-    return render_template("readrecipe.html", recipes=search_results)
-
-
-
-
-
-
+   # return render_template("readrecipe.html", recipes=search_results)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',
