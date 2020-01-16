@@ -61,7 +61,7 @@ ul.features > li {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
 }
 
-dropdown-button{
+.dropdown-button{
     padding: 5px;
 
 }

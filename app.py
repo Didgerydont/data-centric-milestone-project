@@ -7,7 +7,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 import bcrypt
 from datetime import datetime
-from wtforms import StringField, IntegerField, SelectField, SubmitField
+from wtforms import StringField, IntegerField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, URL, ValidationError
 from flask_wtf import FlaskForm
 if os.path.exists("env.py"):
@@ -36,8 +36,20 @@ def load_user(user_id):
 # find stored usernames
 username = mongo.db.users.find()
 
-user_present = False # remember if user has logged in. 
+user_present = False # remember if user has logged in.
 
+
+#login class
+class loginForm(FlaskForm):
+
+    login_username = StringField('Username', validators=[InputRequired()])
+    login_password = PasswordField('Password', validators=[InputRequired()])
+
+class registrationForm(FlaskForm):
+    register_username = StringField('Select a Username', validators=[InputRequired()])
+    register_password = PasswordField('Select a Password', validators=[InputRequired()])
+
+#create recipe class
 class createRecipe(FlaskForm):
     
     recipe_title = StringField('Title', validators=[InputRequired()])
@@ -51,6 +63,8 @@ class createRecipe(FlaskForm):
     recipe_origin = StringField('Country of Origin', validators=[InputRequired()])
 
 
+
+
 # Home
 @app.route("/")
 @app.route("/index")
@@ -61,17 +75,18 @@ def home():
 
 @app.route('/login_landing')
 def login_landing():
-    return render_template('login.html')
+    form = loginForm(request.form) 
+    return render_template('login.html', form=form)
 
 @app.route("/login", methods=['POST'])
-def login():
+def logging_in():
     users=mongo.db.users
-    user_login = users.find_one({'user_name': request.form['username']})
+    user_login = users.find_one({'user_name': request.form['login_username']})
 
     if user_login:
-        if bcrypt.hashpw(request.form['pass'].encode('utf-8'), user_login['password']) == user_login['password']:
-            session['username'] = request.form['username']
-            #user_present = True
+        if bcrypt.hashpw(request.form['login_password'].encode('utf-8'), user_login['password']) == user_login['password']:
+            session['username'] = request.form['login_username']
+            
             return redirect(url_for('login_success'))
 
     return 'Invalid username/password combination'
@@ -82,16 +97,23 @@ def login_success():
         return render_template('login_success.html')
 
 # User registration
+
+@app.route("/registration_landing")
+def registration_landing():
+    form = registrationForm(request.form) 
+    return render_template('register.html', form=form)
+
 @app.route("/register", methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
+        
         users=mongo.db.users
-        existing_user = users.find_one({'user_name': request.form['username']})
+        existing_user = users.find_one({'user_name': request.form['register_username']})
 
         if existing_user == None:
-            hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
-            users.insert({'user_name' : request.form['username'], 'password' : hashpass})
-            session['username'] = request.form['username']
+            hashpass = bcrypt.hashpw(request.form['register_password'].encode('utf-8'), bcrypt.gensalt())
+            users.insert_one({'user_name' : request.form['register_username'], 'password' : hashpass})
+            session['username'] = request.form['register_username']
             return redirect(url_for('login_success'))
 
         return 'Someone already uses that name. Try another'
