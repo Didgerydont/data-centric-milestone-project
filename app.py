@@ -167,6 +167,7 @@ def uploadconfirmation():
 
 
 # Read --> Shows all recipes as a directory. 
+# Include search function hereor not if using JS
 @app.route('/readrecipe')
 def get_recipe():
     return render_template('readrecipe.html', 
@@ -191,6 +192,19 @@ def get_recipe():
   
   
    # return render_template("readrecipe.html", recipes=search_results)
+
+
+# ----> Update // Edit .       remember to create system where a user can only alter their own recipes
+@app.route('find_user_recipe/<users_id>')
+def find_recipe_by_uploader():
+    user_recipe_list = mongo.db.users.find({"_id": ObjectId(users_id)})
+    return render_template('edit_recipe.html')
+
+
+
+
+# Delete . ------->> User specific
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',
