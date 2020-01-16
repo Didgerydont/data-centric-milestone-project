@@ -2,7 +2,7 @@ import os
 import pymongo
 import time
 from flask import Flask, render_template, redirect, request, url_for, session
-from flask_login import LoginManager, UserMixin
+from flask_login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 import bcrypt
@@ -19,6 +19,8 @@ app.config["MONGO_DBNAME"] = os.environ.get('my_data_project')
 app.config["MONGO_URI"] = os.environ.get('MONGO_URI')
 app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY')
 mongo = PyMongo(app)
+login = LoginManager(app)
+login.login_view = 'login'
 
 #Flask-login config
 login_manager = LoginManager()
@@ -31,7 +33,7 @@ def load_user(user_id):
 
 
 
-
+# find stored usernames
 username = mongo.db.users.find()
 
 user_present = False # remember if user has logged in. 
