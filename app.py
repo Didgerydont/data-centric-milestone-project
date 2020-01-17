@@ -198,13 +198,14 @@ def get_recipe():
    # return render_template("readrecipe.html", recipes=search_results)
 
 
-# ----> Update // Edit .       remember to create system where a user can only alter their own recipes
-#@app.route('/find_user_recipe/<users_id>')
-#def find_recipe_by_uploader(users_id):
-#    if user_present:
-#        user_recipe_list = mongo.db.users.find({"_id": ObjectId(users_id)})
-#        return render_template('edit_recipe.html', user_recipe_list=user_recipe_list)
-#    return render_template('sign_in_required.html')
+# ----> Update // Edit .       remember to create system where a user can only alter their own recipes
+
+@app.route('/edit_recipe/<users_id>')
+def edit_recipe(users_id):
+    if user_present = True:
+        user_recipe_list = mongo.db.users.find({"_id": ObjectId(users_id)})
+        return render_template('edit_recipe.html', user_recipe_list=user_recipe_list)
+    return render_template('sign_in_required.html')
 
 
 
