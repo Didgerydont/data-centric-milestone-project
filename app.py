@@ -86,7 +86,7 @@ def logging_in():
     if user_login:
         if bcrypt.hashpw(request.form['login_password'].encode('utf-8'), user_login['password']) == user_login['password']:
             session['username'] = request.form['login_username']
-            
+            user_present = True
             return redirect(url_for('login_success'))
 
     return 'Invalid username/password combination'
@@ -95,6 +95,7 @@ def logging_in():
 def login_success():
     if 'username' in session:
         return render_template('login_success.html')
+
 
 # User registration
 
@@ -125,8 +126,11 @@ def register():
 # Create
 @app.route('/add_recipe')
 def add_recipe():
-    form = createRecipe(request.form)        
-    return render_template('addrecipe.html', form=form)
+    if user_present:
+        form = createRecipe(request.form)        
+        return render_template('addrecipe.html', form=form)
+    else:
+        return render_template('sign_in_required.html')
 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
@@ -167,7 +171,7 @@ def uploadconfirmation():
 
 
 # Read --> Shows all recipes as a directory. 
-# Include search function hereor not if using JS
+# Include search function here or not if using JS
 @app.route('/readrecipe')
 def get_recipe():
     return render_template('readrecipe.html', 
@@ -195,10 +199,12 @@ def get_recipe():
 
 
 # ----> Update // Edit .       remember to create system where a user can only alter their own recipes
-@app.route('find_user_recipe/<users_id>')
-def find_recipe_by_uploader():
-    user_recipe_list = mongo.db.users.find({"_id": ObjectId(users_id)})
-    return render_template('edit_recipe.html')
+#@app.route('/find_user_recipe/<users_id>')
+#def find_recipe_by_uploader(users_id):
+#    if user_present:
+#        user_recipe_list = mongo.db.users.find({"_id": ObjectId(users_id)})
+#        return render_template('edit_recipe.html', user_recipe_list=user_recipe_list)
+#    return render_template('sign_in_required.html')
 
 
 

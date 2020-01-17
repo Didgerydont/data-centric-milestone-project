@@ -26,6 +26,7 @@
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="{{ url_for('get_recipe') }}">Find a Recipe</a></li>
                     <li><a href="{{ url_for('add_recipe') }}">Add a Recipe</a></li>
+                    <li><a href="{{ url_for('find_recipe_by_uploader') }}">Edit a Recipe</a></li>
                     <li><a href="#">Calorie Counter</a></li>
                     <li><a href="{{url_for('login_landing')}}">Login/Register</a></li>
                 </ul>
@@ -35,9 +36,11 @@
                     <li class="divider"></li>
                     <li><a href="{{ url_for('add_recipe') }}"></a>Add a Recipe</li>
                     <li class="divider"></li>
+                    <li><a href="{{ url_for('find_recipe_by_uploader') }}">Edit a Recipe</a></li>
+                    <li class="divider"></li>
                     <li><a href="#">Calorie Counter</a></li>
                     <li class="divider"></li>
-                    <li><a href="{{url_for('login_landing')}}">Login</a></li>
+                    <li><a href="{{url_for('login_landing')}}">Login/Register</a></li>
                 </ul>
             </div>
         </nav>
