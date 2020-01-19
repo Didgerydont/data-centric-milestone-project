@@ -1,9 +1,11 @@
 import os
-import pymongo
+from pymongo import MongoClient
 import time
 from flask import Flask, render_template, redirect, request, url_for, session
 from flask_login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required
 from flask_pymongo import PyMongo
+from flask_mongoengine import MongoEngine
+from flask_mongoengine.wtf import model_form
 from bson.objectid import ObjectId
 import bcrypt
 from datetime import datetime
@@ -18,26 +20,47 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = os.environ.get('my_data_project')
 app.config["MONGO_URI"] = os.environ.get('MONGO_URI')
 app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY')
+
 mongo = PyMongo(app)
 login = LoginManager(app)
 login.login_view = 'login'
 
 #Flask-login config
+app.config['MONGODB_SETTINGS'] = {
+	'db': 'flaskapp'
+}
 login_manager = LoginManager()
 login_manager.init_app(app)
+bcrypt = Bcrypt(app)
 
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.get(user_id)
-
-
+db = MongoEngine(app)
 
 # find stored usernames
 username = mongo.db.users.find()
 
-user_present = False # remember if user has logged in.
+class User(UserMixin):
+    username = db.StringField()
+    password = db.StringField()
 
+    def __init__(self, name, email, password):
+        self.name = name
+        self.password = bcrypt.hashpw(password)
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return unicode(self.id)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.objects(pk=user_id).first()
 
 #login class
 class loginForm(FlaskForm):
@@ -86,7 +109,8 @@ def logging_in():
     if user_login:
         if bcrypt.hashpw(request.form['login_password'].encode('utf-8'), user_login['password']) == user_login['password']:
             session['username'] = request.form['login_username']
-            user_present = True
+            session['logged_in'] = True
+            login_user(user)            
             return redirect(url_for('login_success'))
 
     return 'Invalid username/password combination'
@@ -125,6 +149,7 @@ def register():
 
 # Create
 @app.route('/add_recipe')
+@login_required
 def add_recipe():
     if user_present:
         form = createRecipe(request.form)        
@@ -133,6 +158,7 @@ def add_recipe():
         return render_template('sign_in_required.html')
 
 @app.route('/insert_recipe', methods=['POST'])
+@login_required
 def insert_recipe():
 
     recipes = mongo.db.recipes
@@ -166,6 +192,7 @@ def insert_recipe():
     return redirect(url_for('uploadconfirmation'))
 
 @app.route('/uploadconfirmation')
+@login_required
 def uploadconfirmation():
     return render_template('uploadconfirmation.html')
 
@@ -200,12 +227,12 @@ def get_recipe():
 
 # ----> Update // Edit .       remember to create system where a user can only alter their own recipes
 
-@app.route('/edit_recipe/<users_id>')
-def edit_recipe(users_id):
-    if user_present = True:
-        user_recipe_list = mongo.db.users.find({"_id": ObjectId(users_id)})
-        return render_template('edit_recipe.html', user_recipe_list=user_recipe_list)
-    return render_template('sign_in_required.html')
+#@app.route('/edit_recipe/<users_id>')
+#def edit_recipe(users_id):
+#    if user_present:
+#        user_recipe_list = mongo.db.users.find({"_id": ObjectId(users_id)})
+#        return render_template('edit_recipe.html', user_recipe_list=user_recipe_list)
+#    return render_template('sign_in_required.html')
 
 
 
