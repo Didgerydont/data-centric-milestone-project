@@ -7,7 +7,7 @@ from flask_pymongo import PyMongo
 from flask_mongoengine import MongoEngine
 from flask_mongoengine.wtf import model_form
 from bson.objectid import ObjectId
-import bcrypt
+from bcrypt import Bcrypt
 from datetime import datetime
 from wtforms import StringField, IntegerField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, URL, ValidationError
@@ -27,7 +27,7 @@ login.login_view = 'login'
 
 #Flask-login config
 app.config['MONGODB_SETTINGS'] = {
-	'db': 'flaskapp'
+	'db': 'my_data_project'
 }
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -38,11 +38,12 @@ db = MongoEngine(app)
 # find stored usernames
 username = mongo.db.users.find()
 
-class User(UserMixin):
+class User(UserMixin, db.Document):
+    id = mongo.db.users.find({"_id": ObjectId()})
     username = db.StringField()
     password = db.StringField()
 
-    def __init__(self, name, email, password):
+    def __init__(self, name, password):
         self.name = name
         self.password = bcrypt.hashpw(password)
 
