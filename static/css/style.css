@@ -66,6 +66,13 @@ ul.features > li {
 
 }
 
+/*buttons */
+.edit-delete-buttons-container{
+    text-align: center;
+}
+.edit-delete-buttons{
+    display: inline-block;
+}
 /* menu options*/
 
 

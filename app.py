@@ -2,6 +2,7 @@ import os
 from pymongo import MongoClient
 import time
 from flask import Flask, render_template, redirect, request, url_for, session
+from flask_session import Session
 from flask_login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -21,43 +22,12 @@ app.config["MONGO_URI"] = os.environ.get('MONGO_URI')
 app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY')
 
 mongo = PyMongo(app)
+
+#Flask-login config
 login = LoginManager(app)
 login.login_view = 'login'
 
-#Flask-login config
-app.config['MONGODB_SETTINGS'] = {
-	'db': 'my_data_project'
-}
-login_manager = LoginManager()
-login_manager.init_app(app)
 
-
-
-# find stored usernames
-#class User(UserMixin, db.Document):
-#    id = mongo.db.users.user_name.find({"_id": ObjectId()})
-#    username = db.StringField()
-#    password = db.StringField()
-
-#    def __init__(self, name, password):
-#        self.name = name
-#        self.password = bcrypt.hashpw(password)
-#
-#   def is_authenticated(self):
-#        return True
-
-#    def is_active(self):
-#        return True
-
-#    def is_anonymous(self):
-#        return False
-
-#    def get_id(self):
-#        return unicode(self.id)
-
-#@login_manager.user_loader
-#def load_user(user_id):
-#    return User.objects(pk=user_id).first()
 
 #login class
 class loginForm(FlaskForm):
@@ -149,25 +119,24 @@ def register():
 # Create
 @app.route('/add_recipe')
 def add_recipe():
-    
-        form = createRecipe(request.form)        
-        return render_template('addrecipe.html', form=form)
+    form = createRecipe(request.form)        
+    return render_template('addrecipe.html', form=form)
 
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
-    if session['logged_in']:
+    if session.get('logged_in') == True:
         recipes = mongo.db.recipes
 
-        recipe_title = request.form['recipe_title']
+        recipe_title = request.form['recipe_title']        
         recipe_description = request.form['recipe_description']
-        recipe_method = request.form['recipe_method']
+        recipe_method = request.form['recipe_method']    
         recipe_ingredients = request.form['recipe_ingredients']
         recipe_meal_type = request.form['recipe_meal_type']
         recipe_serves = request.form['recipe_serves']
         recipe_cooktime = request.form['recipe_cooktime']
         recipe_preptime = request.form['recipe_preptime']
         recipe_origin = request.form['recipe_origin']
-        # Still have to figure out how to keep the user logged in
+            # Still have to figure out how to keep the user logged in
 
         recipe_form = {
             "title": recipe_title,
@@ -185,8 +154,8 @@ def insert_recipe():
 
         recipes.insert_one(recipe_form)
         return redirect(url_for('uploadconfirmation'))
-    elif session['logged_in'] == False:
-        return render_template('sign_in_required.html')
+    return render_template('sign_in_required.html')
+    
 
 @app.route('/uploadconfirmation')
 def uploadconfirmation():
@@ -223,12 +192,13 @@ def get_recipe():
 
 # ----> Update // Edit .       remember to create system where a user can only alter their own recipes
 
-#@app.route('/edit_recipe/<users_id>')
-#def edit_recipe(users_id):
-#    if user_present:
-#        user_recipe_list = mongo.db.users.find({"_id": ObjectId(users_id)})
-#        return render_template('edit_recipe.html', user_recipe_list=user_recipe_list)
-#    return render_template('sign_in_required.html')
+#@app.route('/edit_recipe/<recipe_id>')
+#def edit_recipe(user_id):
+#    recipes = mongo.db.recipes.find_one({"_id": ObjectId(user_id)})
+ #   countries = mongo.db.countries.find()
+ #   users = mongo.db.recipes.find("user_name": username in session)
+ #  return render_template('editrecipe.html',
+ #                         recipes=recipes, countries=countries, user=user)
 
 
 
