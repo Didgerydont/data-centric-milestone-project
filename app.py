@@ -4,8 +4,6 @@ import time
 from flask import Flask, render_template, redirect, request, url_for, session
 from flask_login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required
 from flask_pymongo import PyMongo
-from flask_mongoengine import MongoEngine 
-from flask_mongoengine.wtf import model_form
 from bson.objectid import ObjectId
 import bcrypt
 from datetime import datetime
@@ -32,6 +30,8 @@ app.config['MONGODB_SETTINGS'] = {
 }
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+
 
 # find stored usernames
 #class User(UserMixin, db.Document):
@@ -109,7 +109,7 @@ def logging_in():
     if user_login:
         if bcrypt.hashpw(request.form['login_password'].encode('utf-8'), user_login['password']) == user_login['password']:
             session['username'] = request.form['login_username']
-            session['logged_in'] = True          
+            session['logged_in'] == True          
             return redirect(url_for('login_success'))
 
     return 'Invalid username/password combination'
@@ -148,50 +148,47 @@ def register():
 
 # Create
 @app.route('/add_recipe')
-@login_required
 def add_recipe():
-    if session['logged_in']:
+    
         form = createRecipe(request.form)        
         return render_template('addrecipe.html', form=form)
-    else:
-        return render_template('sign_in_required.html')
 
 @app.route('/insert_recipe', methods=['POST'])
-@login_required
 def insert_recipe():
+    if session['logged_in']:
+        recipes = mongo.db.recipes
 
-    recipes = mongo.db.recipes
-
-    recipe_title = request.form['recipe_title']
-    recipe_description = request.form['recipe_description']
-    recipe_method = request.form['recipe_method']
-    recipe_ingredients = request.form['recipe_ingredients']
-    recipe_meal_type = request.form['recipe_meal_type']
-    recipe_serves = request.form['recipe_serves']
-    recipe_cooktime = request.form['recipe_cooktime']
-    recipe_preptime = request.form['recipe_preptime']
-    recipe_origin = request.form['recipe_origin']
-    # Still have to figure out how to keep the user logged in
-
-    recipe_form = {
-        "title": recipe_title,
-        "description": recipe_description,
-        "method": recipe_method,
-        "ingredients": recipe_ingredients,
-        "meal": recipe_meal_type,
-        "serves": recipe_serves, 
-        "cooking_time": recipe_cooktime,
-        "prep_time": recipe_preptime,
-        "country_of_origin": recipe_origin,
-        "last_modified": time.asctime(time.localtime(time.time()))
+        recipe_title = request.form['recipe_title']
+        recipe_description = request.form['recipe_description']
+        recipe_method = request.form['recipe_method']
+        recipe_ingredients = request.form['recipe_ingredients']
+        recipe_meal_type = request.form['recipe_meal_type']
+        recipe_serves = request.form['recipe_serves']
+        recipe_cooktime = request.form['recipe_cooktime']
+        recipe_preptime = request.form['recipe_preptime']
+        recipe_origin = request.form['recipe_origin']
         # Still have to figure out how to keep the user logged in
-    }
 
-    recipes.insert_one(recipe_form)
-    return redirect(url_for('uploadconfirmation'))
+        recipe_form = {
+            "title": recipe_title,
+            "description": recipe_description,
+            "method": recipe_method,
+            "ingredients": recipe_ingredients,
+            "meal": recipe_meal_type,
+            "serves": recipe_serves, 
+            "cooking_time": recipe_cooktime,
+            "prep_time": recipe_preptime,
+            "country_of_origin": recipe_origin,
+            "last_modified": time.asctime(time.localtime(time.time()))
+            # Still have to figure out how to keep the user logged in
+        }
+
+        recipes.insert_one(recipe_form)
+        return redirect(url_for('uploadconfirmation'))
+    elif session['logged_in'] == False:
+        return render_template('sign_in_required.html')
 
 @app.route('/uploadconfirmation')
-@login_required
 def uploadconfirmation():
     return render_template('uploadconfirmation.html')
 
