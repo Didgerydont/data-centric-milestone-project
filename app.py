@@ -4,16 +4,17 @@ import time
 from flask import Flask, render_template, redirect, request, url_for, session
 from flask_login import LoginManager, UserMixin, current_user, login_user, logout_user, login_required
 from flask_pymongo import PyMongo
-from flask_mongoengine import MongoEngine
+from flask_mongoengine import MongoEngine 
 from flask_mongoengine.wtf import model_form
 from bson.objectid import ObjectId
-from bcrypt import Bcrypt
+import bcrypt
 from datetime import datetime
 from wtforms import StringField, IntegerField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, URL, ValidationError
 from flask_wtf import FlaskForm
 if os.path.exists("env.py"):
     import env
+
 #app configuration
 app = Flask(__name__)
 
@@ -31,37 +32,32 @@ app.config['MONGODB_SETTINGS'] = {
 }
 login_manager = LoginManager()
 login_manager.init_app(app)
-bcrypt = Bcrypt(app)
-
-db = MongoEngine(app)
 
 # find stored usernames
-username = mongo.db.users.find()
+#class User(UserMixin, db.Document):
+#    id = mongo.db.users.user_name.find({"_id": ObjectId()})
+#    username = db.StringField()
+#    password = db.StringField()
 
-class User(UserMixin, db.Document):
-    id = mongo.db.users.find({"_id": ObjectId()})
-    username = db.StringField()
-    password = db.StringField()
+#    def __init__(self, name, password):
+#        self.name = name
+#        self.password = bcrypt.hashpw(password)
+#
+#   def is_authenticated(self):
+#        return True
 
-    def __init__(self, name, password):
-        self.name = name
-        self.password = bcrypt.hashpw(password)
+#    def is_active(self):
+#        return True
 
-    def is_authenticated(self):
-        return True
+#    def is_anonymous(self):
+#        return False
 
-    def is_active(self):
-        return True
+#    def get_id(self):
+#        return unicode(self.id)
 
-    def is_anonymous(self):
-        return False
-
-    def get_id(self):
-        return unicode(self.id)
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.objects(pk=user_id).first()
+#@login_manager.user_loader
+#def load_user(user_id):
+#    return User.objects(pk=user_id).first()
 
 #login class
 class loginForm(FlaskForm):
@@ -86,6 +82,9 @@ class createRecipe(FlaskForm):
     recipe_cooktime = StringField('Cooking Time', validators=[InputRequired()])
     recipe_origin = StringField('Country of Origin', validators=[InputRequired()])
 
+# if session['logged_in'] == True
+#
+#
 
 
 
@@ -110,8 +109,7 @@ def logging_in():
     if user_login:
         if bcrypt.hashpw(request.form['login_password'].encode('utf-8'), user_login['password']) == user_login['password']:
             session['username'] = request.form['login_username']
-            session['logged_in'] = True
-            login_user(user)            
+            session['logged_in'] = True          
             return redirect(url_for('login_success'))
 
     return 'Invalid username/password combination'
@@ -152,7 +150,7 @@ def register():
 @app.route('/add_recipe')
 @login_required
 def add_recipe():
-    if user_present:
+    if session['logged_in']:
         form = createRecipe(request.form)        
         return render_template('addrecipe.html', form=form)
     else:
