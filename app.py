@@ -64,7 +64,7 @@ class createRecipe(FlaskForm):
 def home():
     return render_template('index.html')
 
-# User login
+# User login / logout management
 
 @app.route('/login_landing')
 def login_landing():
@@ -148,7 +148,8 @@ def insert_recipe():
             "cooking_time": recipe_cooktime,
             "prep_time": recipe_preptime,
             "country_of_origin": recipe_origin,
-            "last_modified": time.asctime(time.localtime(time.time()))
+            "last_modified": time.asctime(time.localtime(time.time())),
+            "user_name": session['username']
             # Still have to figure out how to keep the user logged in
         }
 
@@ -169,7 +170,20 @@ def get_recipe():
     return render_template('readrecipe.html', 
     recipes=mongo.db.recipes.find())
     
+# ----> Update // Edit .       remember to create system where a user can only alter their own recipes
 
+#@app.route('/edit_recipe/<recipe_id>')
+#def edit_recipe(user_id):
+#    recipes = mongo.db.recipes.find_one({"_id": ObjectId(user_id)})
+ #   countries = mongo.db.countries.find()
+ #   users = mongo.db.recipes.find("user_name": username in session)
+ #  return render_template('editrecipe.html',
+ #                         recipes=recipes, countries=countries, user=user)
+
+
+
+
+# Delete . ------->> User specific
 
 ## Come back to Search, must find another as Mongo shell cant be used on this version of gitpod
 # Search bar
@@ -190,20 +204,7 @@ def get_recipe():
    # return render_template("readrecipe.html", recipes=search_results)
 
 
-# ----> Update // Edit .       remember to create system where a user can only alter their own recipes
 
-#@app.route('/edit_recipe/<recipe_id>')
-#def edit_recipe(user_id):
-#    recipes = mongo.db.recipes.find_one({"_id": ObjectId(user_id)})
- #   countries = mongo.db.countries.find()
- #   users = mongo.db.recipes.find("user_name": username in session)
- #  return render_template('editrecipe.html',
- #                         recipes=recipes, countries=countries, user=user)
-
-
-
-
-# Delete . ------->> User specific
 
 
 if __name__ == '__main__':
