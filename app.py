@@ -97,7 +97,6 @@ def login_success():
 
 @app.route('/logout')
 def logout():
-   # remove the username from the session if it is there
    session.pop('username', None)
    session.clear()
    return redirect(url_for('home'))
@@ -153,7 +152,6 @@ def insert_recipe():
     recipe_cooktime = request.form['recipe_cooktime']
     recipe_preptime = request.form['recipe_preptime']
     recipe_origin = request.form['recipe_origin']
-        # Still have to figure out how to keep the user logged in
 
     recipe_form = {
         "title": recipe_title,
@@ -167,7 +165,6 @@ def insert_recipe():
         "country_of_origin": recipe_origin,
         "last_modified": time.asctime(time.localtime(time.time())),
         "user_name": session['username']
-            # Still have to figure out how to keep the user logged in
         }
 
     recipes.insert_one(recipe_form)
@@ -216,7 +213,6 @@ def update_recipe():
     recipe_cooktime = request.form['recipe_cooktime']
     recipe_preptime = request.form['recipe_preptime']
     recipe_origin = request.form['recipe_origin']
-        # Still have to figure out how to keep the user logged in
 
     recipe_form = {
         "title": recipe_title,
@@ -230,7 +226,6 @@ def update_recipe():
         "country_of_origin": recipe_origin,
         "last_modified": time.asctime(time.localtime(time.time())),
         "user_name": session['username']
-            # Still have to figure out how to keep the user logged in
         }
 
     recipes.update({'_id': ObjectId(recipe_id)}, {recipe_form})
