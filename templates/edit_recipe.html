@@ -6,21 +6,25 @@
             {{ form.csrf_token }}
             <h4 class="form-header center">You can edit your recipe below</h4>
             <ul class="add-recipe-form">
-                <li class="add-recipe-li">{{ form.recipe_title(placeholder="{{recipe.title}}") }} {{ form.recipe_title }}</li>
-                <li class="add-recipe-li">{{ form.recipe_description(placeholder="{{recipe.description}}") }} {{ form.recipe_description }}</li>
-                <li class="add-recipe-li">{{ form.recipe_method(placeholder="{{recipe.method}}") }} {{ form.recipe_method }}</li>
-                <li class="add-recipe-li">{{ form.recipe_ingredients(placeholder="{{recipe.ingredients}}") }} {{ form.recipe_ingredients }}</li>
-                <li class="add-recipe-li">{{ form.recipe_meal_type(placeholder="{{recipe.meal}}") }} {{ form.recipe_meal_type }}</li>
-                <li class="add-recipe-li">{{ form.recipe_serves(placeholder="{{recipe.serves}}") }} {{ form.recipe_serves }}</li>
-                <li class="add-recipe-li">{{ form.recipe_preptime(placeholder="{{recipe.prep_time}}") }} {{ form.recipe_preptime }}</li>
-                <li class="add-recipe-li">{{ form.recipe_cooktime(placeholder="{{recipe.cooking_time}}") }} {{ form.recipe_cooktime }}</li>
-                <li class="add-recipe-li">{{ form.recipe_origin(placeholder="{{recipe.country_of_origin}}") }} {{ form.recipe_origin }}</li>
-                <button type="submit" class="btn btn-primary btn-block green lighten-2">Submit</button>
-                <button type="submit" class="btn btn-primary btn-block red lighten-2">Cancel</button>
+                {% for this_recipe in recipe %}
+                <li class="add-recipe-li header"><h5>{{ this_recipe.title }}</h5></li>
+                <li class="add-recipe-li">{{ form.recipe_title(placeholder="{{ this_recipe.title }}") }} {{ form.recipe_title }}</li>
+                
+                <li class="add-recipe-li">{{ form.recipe_description(placeholder="{{ this_recipe.description }}") }} {{ form.recipe_description }}</li>
+                <li class="add-recipe-li">{{ form.recipe_method(placeholder="{{this_recipe.method}}") }} {{ form.recipe_method }}</li>
+                <li class="add-recipe-li">{{ form.recipe_ingredients(placeholder="{{this_recipe.ingredients}}") }} {{ form.recipe_ingredients }}</li>
+                <li class="add-recipe-li">{{ form.recipe_meal_type(placeholder="{{this_recipe.meal}}") }} {{ form.recipe_meal_type }}</li>
+                <li class="add-recipe-li">{{ form.recipe_serves(placeholder="{{this_recipe.serves}}") }} {{ form.recipe_serves }}</li>
+                <li class="add-recipe-li">{{ form.recipe_preptime(placeholder="{{this_recipe.prep_time}}") }} {{ form.recipe_preptime }}</li>
+                <li class="add-recipe-li">{{ form.recipe_cooktime(placeholder="{{this_recipe.cooking_time}}") }} {{ form.recipe_cooktime }}</li>
+                <li class="add-recipe-li">{{ form.recipe_origin(placeholder="{{this_recipe.country_of_origin}}") }} {{ form.recipe_origin }}</li>
+
+                {% endfor %}
+
+                <a type="submit" class="center btn btn-primary btn-block green lighten-2">Submit</a>
             </ul>
-            
-        
         </form>
+        <a action="{{ url_for('get_recipe') }}" class="center btn btn-primary btn-block red lighten-2">Cancel</a>
     </div>
 </div>
 

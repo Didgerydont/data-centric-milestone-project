@@ -188,18 +188,18 @@ def get_recipe():
     
 # ----> Update // Edit .       remember to create system where a user can only alter their own recipes
 
-@app.route('/edit_recipe/<recipe_id>')
+@app.route('/edit_recipe/<recipe_id>', methods=['GET'])
 def edit_recipe(recipe_id):
     if 'username' in session:
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
         user_recipes = mongo.db.recipes.find({"user_name": session['username']})
-        if user_recipes in recipe:
+        if recipe in user_recipes:
             form = editRecipe(request.form)  
-            return render_template('editrecipe.html', recipe=recipe, user_recipes=user_recipes, form=form)
+            return render_template('edit_recipe.html', recipe=recipe, user_recipes=user_recipes, form=form)
         return flash('You can only alter your own recipes')
     return render_template('sign_in_required.html')
 
-@app.route('/update_recipe/<recipe_id>', methods=['POST'])
+@app.route('/update_recipe/<recipe_id>', methods=['POST', 'GET'])
 def update_recipe():
     
     recipes = mongo.db.recipes
@@ -237,6 +237,18 @@ def update_recipe():
 
 
 # Delete . ------->> User specific
+
+@app.route('/delete_recipe/<recipe_id>')
+def delete_recipe(recipe_id):
+    if 'username' in session:
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        user_recipes = mongo.db.recipes.find({"user_name": session['username']})
+        if recipe in user_recipes:
+            mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
+            return redirect(url_for('get_recipe'))
+        return flash('You can only alter your own recipes')
+    return render_template('sign_in_required.html')
+
 
 ## Come back to Search, must find another as Mongo shell cant be used on this version of gitpod
 # Search bar

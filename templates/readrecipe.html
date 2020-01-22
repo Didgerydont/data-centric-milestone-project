@@ -92,7 +92,7 @@
                                     <br>
                                     <div class="edit-delete-buttons-container edit-delete-buttons">
                                         <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn btn-primary btn-block green lighten-2 center">Edit</a>
-                                        <a href="#" class="btn btn-primary btn-block green lighten-2 center">Delete</a>
+                                        <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn btn-primary btn-block green lighten-2 center">Delete</a> 
                                     </div>
                                 </div>
                             </div>
