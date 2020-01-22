@@ -20,9 +20,6 @@
                 <li class="add-recipe-li">{{ form.recipe_cooktime.label }} {{ form.recipe_cooktime }}</li>
                 <li class="add-recipe-li">{{ form.recipe_origin.label }} {{ form.recipe_origin }}</li>
                 <button type="submit" class="btn btn-primary btn-block green lighten-2">Submit</button>
-                {% for error in form.errors %}
-                    <li style="color:red">{{ error }}</li>
-                {% endfor %}
             </ul>
             
         

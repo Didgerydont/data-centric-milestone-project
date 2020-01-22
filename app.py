@@ -196,7 +196,9 @@ def edit_recipe(recipe_id):
         if recipe in user_recipes:
             form = editRecipe(request.form)  
             return render_template('edit_recipe.html', recipe=recipe, user_recipes=user_recipes, form=form)
-        return flash('You can only alter your own recipes')
+        else:
+            flash('You can only alter your own recipes')
+            return render_template('sign_in_required.html')
     return render_template('sign_in_required.html')
 
 @app.route('/update_recipe/<recipe_id>', methods=['POST', 'GET'])
@@ -236,7 +238,7 @@ def update_recipe():
 
 
 
-# Delete . ------->> User specific
+# Delete . ------->> User specific             Trying to delete other recipes currently returns an error " TypeError: The view function did not return a valid response. The function either returned None or ended without a return statement. "
 
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
@@ -245,10 +247,18 @@ def delete_recipe(recipe_id):
         user_recipes = mongo.db.recipes.find({"user_name": session['username']})
         if recipe in user_recipes:
             mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
+            flash('Recipe Deleted')
             return redirect(url_for('get_recipe'))
-        return flash('You can only alter your own recipes')
+        else:
+            flash('You can only alter your own recipes')
+            return render_template('sign_in_required.html')
     return render_template('sign_in_required.html')
 
+
+
+@app.route('/fatsecret')
+def fatsecret():
+    return render_template('fatsecret.html')
 
 ## Come back to Search, must find another as Mongo shell cant be used on this version of gitpod
 # Search bar

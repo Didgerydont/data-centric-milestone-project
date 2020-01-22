@@ -13,7 +13,9 @@ p{
     font-size: 23px;
     text-align: left;
 }
-
+.fat-secret-font{
+    color: #81C784;
+}
 
 /* list items */
 ul.features > li {

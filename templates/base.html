@@ -26,7 +26,7 @@
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="{{ url_for('get_recipe') }}">Find a Recipe</a></li>
                     <li><a href="{{ url_for('add_recipe') }}">Add a Recipe</a></li>
-                    <li><a href="#">Calorie Counter</a></li>
+                    <li><a href="{{url_for('fatsecret')}}">Calorie Counter</a></li>
                     <li><a href="{{url_for('login_landing')}}">Login/Register</a></li>
                 </ul>
                 <a class='dropdown-trigger right hide-on-large-only dropdown-button' href='#' data-target='dropdown1'><i class="material-icons hoverable">menu</i></a>
@@ -35,7 +35,7 @@
                     <li class="divider"></li>
                     <li><a href="{{ url_for('add_recipe') }}"></a>Add a Recipe</li>
                     <li class="divider"></li>
-                    <li><a href="#">Calorie Counter</a></li>
+                    <li><a href="{{url_for('fatsecret')}}">Calorie Counter</a></li>
                     <li class="divider"></li>
                     <li><a href="{{url_for('login_landing')}}">Login/Register</a></li>
                 </ul>
