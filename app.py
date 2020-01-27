@@ -193,7 +193,9 @@ def edit_recipe(recipe_id):
     if 'username' in session:
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
         user_recipes = mongo.db.recipes.find({"user_name": session['username']})
-        print(recipe)
+        print("This is a print statment")
+        print(user_recipes)
+        print("This is also a print statment")
         if recipe in user_recipes:
             form = editRecipe(request.form)
             form.recipe_title.data = recipe.title
@@ -248,7 +250,7 @@ def update_recipe():
 
 
 
-# Delete . ------->> User specific             Trying to delete other recipes currently returns an error " TypeError: The view function did not return a valid response. The function either returned None or ended without a return statement. "
+# Delete . ------->> User specific    Working as expected
 
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):

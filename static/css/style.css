@@ -1,4 +1,11 @@
 /* General structural elements                    */
+body{
+    background-color: #f9f9f9;
+}
+
+
+
+
 
 /* structure */
 
@@ -15,6 +22,16 @@ p{
 }
 .fat-secret-font{
     color: #81C784;
+}
+
+
+.mainscreen-anchors{
+    text-align: center;
+    color: #81C784;
+    cursor: pointer;
+    font-family: 'Crimson Text', serif;
+    font-size: 23px;
+    padding : 10px;
 }
 
 /* list items */
@@ -56,6 +73,10 @@ ul.features > li {
 }
 /* Navbar*/
 
+.brand-logo{
+    margin-left: 25px;
+}
+
 /* drop down collapsible*/
 
 .dropdown-button:hover{
@@ -80,4 +101,11 @@ ul.features > li {
 
 .material-icons{
     padding: 10px;
+}
+
+
+.gif-container{
+    text-align: center;
+    width: 33%;
+    height: 33%;
 }
