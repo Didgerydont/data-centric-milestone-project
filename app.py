@@ -48,7 +48,7 @@ class createRecipe(FlaskForm):
     recipe_ingredients = StringField('Ingredients', validators=[InputRequired()])
     recipe_meal_type = StringField('Meal Type', validators=[InputRequired()])
     recipe_serves = IntegerField('Serves', validators=[InputRequired()])
-    recipe_preptime = StringField('Preperation',validators=[InputRequired()])
+    recipe_preptime = StringField('Preperation time',validators=[InputRequired()])
     recipe_cooktime = StringField('Cooking Time', validators=[InputRequired()])
     recipe_origin = StringField('Country of Origin', validators=[InputRequired()])
 
@@ -193,8 +193,18 @@ def edit_recipe(recipe_id):
     if 'username' in session:
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
         user_recipes = mongo.db.recipes.find({"user_name": session['username']})
+        print(recipe)
         if recipe in user_recipes:
-            form = editRecipe(request.form)  
+            form = editRecipe(request.form)
+            form.recipe_title.data = recipe.title
+            form.recipe_description.data = recipe.description
+            form.recipe_ingredients.data = recipe.ingredients
+            form.recipe_method.data = recipe.method
+            form.recipe_meal_type.data = recipe.meal
+            form.recipe_serves.data = recipe.serves
+            form.recipe_preptime.data = recipe.prep_time
+            form.recipe_cooktime.data = recipe.cooking_time
+            form.recipe_origin.data = recipe.country_of_origin
             return render_template('edit_recipe.html', recipe=recipe, user_recipes=user_recipes, form=form)
         else:
             flash('You can only alter your own recipes')
@@ -246,7 +256,7 @@ def delete_recipe(recipe_id):
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
         user_recipes = mongo.db.recipes.find({"user_name": session['username']})
         if recipe in user_recipes:
-            mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
+            mongo.db.recipes.delete_one({'_id': ObjectId(recipe_id)})
             flash('Recipe Deleted')
             return redirect(url_for('get_recipe'))
         else:
