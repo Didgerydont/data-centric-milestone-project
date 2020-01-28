@@ -8,7 +8,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 import bcrypt
 from datetime import datetime
-from wtforms import StringField, IntegerField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, IntegerField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import InputRequired, URL, ValidationError
 from flask_wtf import FlaskForm
 if os.path.exists("env.py"):
@@ -43,9 +43,9 @@ class registrationForm(FlaskForm):
 class createRecipe(FlaskForm):
     
     recipe_title = StringField('Title', validators=[InputRequired()])
-    recipe_description = StringField('Description', validators=[InputRequired()])        
-    recipe_method = StringField('Method', validators=[InputRequired()])
-    recipe_ingredients = StringField('Ingredients', validators=[InputRequired()])
+    recipe_description = TextAreaField('Description', validators=[InputRequired()])        
+    recipe_method = TextAreaField('Method', validators=[InputRequired()])
+    recipe_ingredients = TextAreaField('Ingredients', validators=[InputRequired()])
     recipe_meal_type = StringField('Meal Type', validators=[InputRequired()])
     recipe_serves = IntegerField('Serves', validators=[InputRequired()])
     recipe_preptime = StringField('Preperation time',validators=[InputRequired()])
@@ -55,9 +55,9 @@ class createRecipe(FlaskForm):
 class editRecipe(FlaskForm):
     
     recipe_title = StringField('Title', validators=[InputRequired()])
-    recipe_description = StringField('Description', validators=[InputRequired()])        
-    recipe_method = StringField('Method', validators=[InputRequired()])
-    recipe_ingredients = StringField('Ingredients', validators=[InputRequired()])
+    recipe_description = TextAreaField('Description', validators=[InputRequired()])        
+    recipe_method = TextAreaField('Method', validators=[InputRequired()])
+    recipe_ingredients = TextAreaField('Ingredients', validators=[InputRequired()])
     recipe_meal_type = StringField('Meal Type', validators=[InputRequired()])
     recipe_serves = IntegerField('Serves', validators=[InputRequired()])
     recipe_preptime = StringField('Preperation',validators=[InputRequired()])
