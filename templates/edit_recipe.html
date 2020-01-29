@@ -7,7 +7,7 @@
             <h4 class="headers center">You can edit your recipe below</h4>
             <ul class="add-recipe-form">
             {% for this_recipe in recipe %}
-
+            
                 <li class="add-recipe-li">{{ this_recipe.title }} {{ form.recipe_title }}</li>
                 
                 <li class="add-recipe-li">{{ this_recipe.description }} {{ form.recipe_description }}</li>

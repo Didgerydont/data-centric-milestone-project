@@ -194,8 +194,11 @@ def edit_recipe(recipe_id):
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
         user_recipes = mongo.db.recipes.find({"user_name": session['username']})
         print("This is a print statment")
-        print(user_recipes)
-        print("This is also a print statment")
+        print(type(user_recipes))
+        print("This is also a new print statment")
+        print(recipe)
+        for value in recipe: 
+            print(value)
         if recipe in user_recipes:
             form = editRecipe(request.form)
             form.recipe_title.data = recipe.title
