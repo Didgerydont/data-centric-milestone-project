@@ -1,6 +1,6 @@
 /* General structural elements                    */
 body{
-    background-color: #f9f9f9;
+    background-image: url('assets/StockSnap_8002II1N54.jpg');
 }
 
 
@@ -19,8 +19,8 @@ body{
 }
 
 p{
-    font-family: 'Crimson Text', serif;
-    font-size: 23px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 15px;
     text-align: left;
 }
 .fat-secret-font{

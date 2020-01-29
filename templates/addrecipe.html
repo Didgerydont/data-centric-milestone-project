@@ -11,15 +11,39 @@
             <h4 class="form-header center">Insert the details of your new recipe below</h4>
             <ul class="add-recipe-form">
                 <li class="add-recipe-li">{{ form.recipe_title.label }} {{ form.recipe_title }}</li>
+                <br>
                 <li class="add-recipe-li">{{ form.recipe_description.label }} {{ form.recipe_description }}</li>
+                <br>
                 <li class="add-recipe-li">{{ form.recipe_ingredients.label }} {{ form.recipe_ingredients }}</li>
+                <br>
                 <li class="add-recipe-li">{{ form.recipe_method.label }} {{ form.recipe_method }}</li>
+                <br>
                 <li class="add-recipe-li">{{ form.recipe_meal_type.label }} {{ form.recipe_meal_type }}</li>
+                <br>
                 <li class="add-recipe-li">{{ form.recipe_serves.label }} {{ form.recipe_serves }}</li>
+                <br>
                 <li class="add-recipe-li">{{ form.recipe_preptime.label }} {{ form.recipe_preptime }}</li>
+                <br>
                 <li class="add-recipe-li">{{ form.recipe_cooktime.label }} {{ form.recipe_cooktime }}</li>
+                <br>
                 <li class="add-recipe-li">{{ form.recipe_origin.label }} {{ form.recipe_origin }}</li>
-                <button type="submit" class="btn btn-primary btn-block green lighten-2">Submit</button>
+                <br>
+                <div class="container">
+                    <div class="row">
+                        <div class="col s6 center">
+                            <button type="submit" class="btn waves-effect waves-light green lighten-2">
+                                <i class="material-icons left">send</i>
+                                Submit
+                            </button>
+                        </div>
+                        <div class="col s6 center">
+                            <button type="reset" class="btn waves-effect waves-light red lighten-2 ">
+                                <i class="material-icons left">refresh-alt</i>
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </ul>
             
         

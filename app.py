@@ -201,15 +201,15 @@ def edit_recipe(recipe_id):
             print(value)
         if recipe in user_recipes:
             form = editRecipe(request.form)
-            form.recipe_title.data = recipe.title
-            form.recipe_description.data = recipe.description
-            form.recipe_ingredients.data = recipe.ingredients
-            form.recipe_method.data = recipe.method
-            form.recipe_meal_type.data = recipe.meal
-            form.recipe_serves.data = recipe.serves
-            form.recipe_preptime.data = recipe.prep_time
-            form.recipe_cooktime.data = recipe.cooking_time
-            form.recipe_origin.data = recipe.country_of_origin
+            form.recipe_title.data = recipe["title"]
+            form.recipe_description.data = recipe["description"]
+            form.recipe_ingredients.data = recipe["ingredients"]
+            form.recipe_method.data = recipe["method"]
+            form.recipe_meal_type.data = recipe["meal"]
+            form.recipe_serves.data = recipe["serves"]
+            form.recipe_preptime.data = recipe["prep_time"]
+            form.recipe_cooktime.data = recipe["cooking_time"]
+            form.recipe_origin.data = recipe["country_of_origin"]
             return render_template('edit_recipe.html', recipe=recipe, user_recipes=user_recipes, form=form)
         else:
             flash('You can only alter your own recipes')
