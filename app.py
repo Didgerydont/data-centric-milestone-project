@@ -21,11 +21,6 @@ app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY')
 
 mongo = PyMongo(app)
 
-#Flask-login config
-login = LogFormnager(app)
-login.login_view = 'login'
-
-
 
 #login class
 class loginForm(FlaskForm):
@@ -246,11 +241,6 @@ def update_recipe():
     recipes.update({recipe_form})
     return redirect(url_for('uploadconfirmation'))
 
-
-
-
-
-
 # Delete . ------->> User specific    Working as expected
 
 @app.route('/delete_recipe/<recipe_id>')
@@ -267,28 +257,28 @@ def delete_recipe(recipe_id):
             return render_template('sign_in_required.html')
     return render_template('sign_in_required.html')
 
-#
+# Product
 @app.route('/fatsecret')
-ef fatsecret():
+def fatsecret():
    return render_template('fatsecret.html')
+
+
 ## Come back to Search, must find another as Mongo shell cant be used on this version of gitpod
- Search bar
-        #@app.route('/search_bar/', methods=["POST"])
+#Searchbar
+@app.route('/search_bar/', methods=["POST"])
 def search_bar():
-    search_term = request.form['readsearchtext']
-#    if (search_term != ""):
+    search_term = request.form['search_text']
+    if (search_term != ""):
         return redirect(url_for('search_results', search_text=search_term))
     else:
-        return render_template("recipes.html", recipes=mongo.db.recipes.find())
-#@app.route('/search_results/<search_text>')
-        return render_template("search_findings.html", recipes=search_results)
-#def search_results(search_text):
-#    search_results = mongo.db.recipes.find(
-#        {'$text': {'$search': search_text}})
-  
-  
-   # return render_template("readrecipe.html", recipes=search_results)
+        return render_template("readrecipe.html", recipe=mongo.db.recipes.find())
 
+@app.route('/search_results/<search_text>', methods=['GET'])
+def search_results(search_text):
+    search_results = mongo.db.recipes.find(
+        {'$searchBeta': {'$search': search_text}})
+    return render_template("search_findings.html", recipes=search_results)
+    
 
 
 
