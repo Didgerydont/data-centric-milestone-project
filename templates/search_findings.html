@@ -1,12 +1,112 @@
-{% extends 'base.html'%} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
 <div class="row">
-    <div class="container search-findings">
-        <p>This page may be obsolete</p>
-    </div>
+    <nav class="-search-bar">
+        <div class="nav-wrapper #f0f4c3 lime lighten-4">
+            <form id="search-form" action="" method="POST" class="col s12">
+            <div class="input-field">
+                    <input class="search-bar" type="search" name="search_text" placeholder="Looking for something in particular?" required>
+                        <i class="material-icons" id="sendForm" for="submit-form">search</i>
+                        
+                </div>
+            </form>
+        </div>
+    </nav>
 </div>
 
+<div class="row">
+<h2 class="center headers">Recipe Directory</h2> 
+    {% for result in recipes %} 
+    <div class="container find-recipe-container">
+        
+         
+        <ul class="collapsible">
+            
+            <li>
+            
+                <div class="collapsible-header title-header">
+                    <div class="row">
+                        <div class="col s2 mt1em"><i class="material-icons">expand_more</i></div>
+                        <div class="col s10 header-align"><h3 class="recipe-header browser-default headers">{{recipes.title}}</h3></div>
+                    </div>
+                </div>
+                    <div class="collapsible-body">
+                        <div class="row">
+                            <div class="col s12">
+                                <div class="card">
+                                    <div class="card-image">
+                                    </div>
+                                    <div class="card-content recipe-description">
+                                        <h4 class="recipe-header headers center-align">Description</h4>
+                                        <p class="center-align">{{recipes.description}}</p>
 
+                                    </div>
+                                    <br>    
+                                    <div class="card-content recipe-method">
+                                        <h4 class="recipe-header headers center-align">Method</h4>
+                                        <p class="center-align">{{recipes.method}}</p>
 
+                                    </div>
+                                    <br>
+                                    <div class="card-content recipe-ingredients">
+                                        <h4 class="recipe-header headers center-align">Ingredients</h4>
+                                        <p class="center-align">{{recipes.ingredients}}</p>
+
+                                    </div>
+                                    <br>
+                                    <div class="card-content recipe-meal">
+                                        <h4 class="recipe-header headers center-align">Meal Type</h4>
+                                        <p class="center-align">{{recipes.meal}}</p>
+
+                                    </div>
+                                    <br>
+                                    <div class="card-content recipe-serves">
+                                        <h4 class="recipe-header headers center-align">Servings</h4>
+                                        <p class="center-align">{{recipes.serves}}</p>
+
+                                    </div>
+                                    <br>
+                                    <div class="card-content recipe-prep-time">
+                                        <h4 class="recipe-header headers center-align">Preperation Time</h4>
+                                        <p class="center-align">{{recipes.prep_time}}</p>
+
+                                    </div>
+                                    <br>
+                                    <div class="card-content recipe-cooking-time">
+                                        <h4 class="recipe-header headers center-align">Cooking Time</h4>
+                                        <p class="center-align">{{recipes.cooking_time}}</p>
+
+                                    </div>
+                                    <br>
+                                    <div class="card-content recipe-country-of-origin">
+                                        <h4 class="recipe-header headers center-align">Country of Origin</h4>
+                                        <p class="center-align">{{recipes.country_of_origin}}</p>
+
+                                    </div>
+                                    <br>
+                                    <div class="card-content recipe-user-name">
+                                        <h4 class="recipe-header headers center-align">Uploaded by</h4>
+                                        <p class="center-align">{{recipes.user_name}}</p>
+
+                                    </div>
+                                    <br>
+                                    <div class="edit-delete-buttons-container edit-delete-buttons">
+                                        <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn btn-primary btn-block green lighten-2 center">Edit</a>
+                                        <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn btn-primary btn-block green lighten-2 center">Delete</a> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            </li>
+            
+        </ul>
+
+    </div>
+    {% endfor %}
+</div>
 
 
 

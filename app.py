@@ -267,23 +267,21 @@ def delete_recipe(recipe_id):
             return render_template('sign_in_required.html')
     return render_template('sign_in_required.html')
 
-
-
+#
 @app.route('/fatsecret')
-def fatsecret():
-    return render_template('fatsecret.html')
-
+ef fatsecret():
+   return render_template('fatsecret.html')
 ## Come back to Search, must find another as Mongo shell cant be used on this version of gitpod
-# Search bar
-#@app.route('/search_bar/', methods=["POST"])
-#def search_bar():
-#    search_term = request.form['search_text']
+ Search bar
+        #@app.route('/search_bar/', methods=["POST"])
+def search_bar():
+    search_term = request.form['readsearchtext']
 #    if (search_term != ""):
-#        return redirect(url_for('search_results', search_text=search_term))
-#    else:
-#        return render_template("recipes.html", recipes=mongo.db.recipes.find())
-
+        return redirect(url_for('search_results', search_text=search_term))
+    else:
+        return render_template("recipes.html", recipes=mongo.db.recipes.find())
 #@app.route('/search_results/<search_text>')
+        return render_template("search_findings.html", recipes=search_results)
 #def search_results(search_text):
 #    search_results = mongo.db.recipes.find(
 #        {'$text': {'$search': search_text}})
