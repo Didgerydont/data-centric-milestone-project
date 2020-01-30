@@ -216,7 +216,7 @@ def edit_recipe(recipe_id):
             return render_template('sign_in_required.html')
     return render_template('sign_in_required.html')
 
-@app.route('/update_recipe/<recipe_id>', methods=['POST', 'GET'])
+@app.route('/update_recipe/<recipe_id>', methods=['POST'])
 def update_recipe():
     
     recipes = mongo.db.recipes
@@ -245,7 +245,7 @@ def update_recipe():
         "user_name": session['username']
         }
 
-    recipes.update({'_id': ObjectId(recipe_id)}, {recipe_form})
+    recipes.update({recipe_form})
     return redirect(url_for('uploadconfirmation'))
 
 
