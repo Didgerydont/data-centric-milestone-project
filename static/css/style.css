@@ -9,9 +9,8 @@
 
 /* main */
 .main-content{
-    margin: 25px 0 25px;
+    margin: 40px 0 40px;
 }
-
 /*text*/
 
 .headers{
@@ -46,9 +45,6 @@ ul.features > li {
 }
 
 /* add recipe */
-.add-recipe-container{
-    font: 
-}
 
 
 .material-icons{

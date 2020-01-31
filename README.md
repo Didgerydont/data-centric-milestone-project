@@ -58,19 +58,26 @@ Installed : Flask, os, pymongo, dnspython
 
 
 
-sample Readme
+sample Readme.md
 
-Your Project's Name
-One or two paragraphs providing an overview of your project.
+#Recipe Hub - Data Centric Milestone Project
+The focus of this project is to display the CRUD principle of database orientated software development and design. 
 
-Essentially, this part is your sales pitch.
-
-UX
+##UX
+The goal for the UX of this project was to keep the general layout straightforward and easy to use. 
 Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
 
 In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
 
-As a user type, I want to perform an action, so that I can achieve a goal.
+#### User Stories
+"As an avid cooking enthusiast, I am looking for a website that is easy to navigate and that allows me to keep recipes I encounter or create all in one easy to manage place."
+
+"As a professional, I would like to be able to view other peoples recipes to take my inspiration from. "
+
+"As a parent, Im stuck for time and want to be able to get to the recipes within a couple clicks without having to navigate through a mountain of options."
+
+"As an advertising partner, I want my site to seem attractive to your end users and for them to be able to get to my site quickly from yours" 
+
 This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included as a pdf file in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
 
 Features
