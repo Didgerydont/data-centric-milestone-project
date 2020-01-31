@@ -78,7 +78,14 @@ In particular, as part of this section we recommend that you provide a list of U
 
 "As an advertising partner, I want my site to seem attractive to your end users and for them to be able to get to my site quickly from yours" 
 
-This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included as a pdf file in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
+#### Wireframes
+Below are the original wireframes that I drew up before I began working on the project. Although the project has changed from these original wireframes,
+the general idea has stayed along the same lines. Albeit, with a few differences. As work began on the project these original plans as the same outline and shape 
+wouldnt have worked as the general project had to adapt to code that I was writing. 
+
+![alt](/static/img/data_centric_wireframe_1.JPG "wireframe_1")
+![alt](/static/img/data_centric_wireframe_2.JPG "wireframe_2")
+![alt](/static/img/data_centric_wireframe_3.JPG "wireframe_3")
 
 Features
 In this section, you should go over the different parts of your project, and describe each in a sentence or so.
