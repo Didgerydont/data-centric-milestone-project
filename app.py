@@ -210,7 +210,7 @@ def edit_recipe(recipe_id):
     return render_template('sign_in_required.html')
 
 @app.route('/update_recipe/<recipe_id>', methods=['POST'])
-def update_recipe():
+def update_recipe(recipe_id):
     
     recipes = mongo.db.recipes
 
@@ -224,7 +224,8 @@ def update_recipe():
     recipe_preptime = request.form['recipe_preptime']
     recipe_origin = request.form['recipe_origin']
 
-    recipe_form = {
+    recipes.update({'_id': ObjectId(recipe_id)},
+        {
         "title": recipe_title,
         "description": recipe_description,
         "method": recipe_method,
@@ -236,9 +237,9 @@ def update_recipe():
         "country_of_origin": recipe_origin,
         "last_modified": time.asctime(time.localtime(time.time())),
         "user_name": session['username']
-        }
+        })
 
-    recipes.update({recipe_form})
+    
     return redirect(url_for('uploadconfirmation'))
 
 # Delete . ------->> User specific    Working as expected
@@ -276,12 +277,14 @@ def search_bar():
 @app.route('/search_results/<search_text>', methods=['GET'])
 def search_results(search_text):
     search_results = mongo.db.recipes.find(
-        {'$searchBeta': {'$search': search_text}})
+        {'$text': {'$search': search_text}})
     return render_template("search_findings.html", recipes=search_results)
     
+@app.route('/create_index')
+def create_index():
+    created_index = mongo.db.recipes.createIndex({ "$**": "text" })
 
-
-
+    return created_index
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',
