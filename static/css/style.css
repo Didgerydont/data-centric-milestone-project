@@ -6,6 +6,12 @@
 .login-success-center{
     text-align: center;
 }
+
+/* main */
+.main-content{
+    margin: 25px 0 25px;
+}
+
 /*text*/
 
 .headers{
