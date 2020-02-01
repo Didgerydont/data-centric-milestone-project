@@ -98,7 +98,12 @@ wouldnt have worked as the general project had to adapt to code that I was writi
 The login and registration blocks use bcrypt to salt the users passwords for extra security
 ![users](https://github.com/Didgerydont/data-centric-milestone-project/blob/master/static/img/data_centric_wireframe_users.JPG "Users")
 
-Features
+## Features
+The project has multiple features based on the CRUD principle. As per the project requisits I have used 
+
+#### Read Recipe
+The project uses Python via the Flask framework in order to provide its back-end functionality 
+
 In this section, you should go over the different parts of your project, and describe each in a sentence or so.
 
 Existing Features
