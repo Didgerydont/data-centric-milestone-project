@@ -479,23 +479,44 @@ def delete_recipe(recipe_id):
     return render_template('sign_in_required.html')
 ```
 
-##### Product
+#### Product
+The product that I have worked into my project is the [Fat Secret](fatsecret.com) api. 
+
+Fat secret is a primarily app based service that users can check their food against the Fat Secrey database
+to see exactly how many calories a meal or item of food will contain. The site also offers services
+for creating a profile and tracking eating habits over a long period of time to help with health a weightloss goals. 
+Links to Fatsecret exist on the footer of everypage and within the Fatsecret page itself and is also mentioned within the index page of the site.
+
+The API for Fat Secret simply needs to pasted into its own div on the page and it is self maintained from Fatsecrets end.
 
 
 
 
+#### Features Left to Implement
+Within this project there was a few features that I had really wanted to implement but due to time constraints I must
+move on with the course. 
 
-Existing Features
-Feature 1 - allows users X to achieve Y, by having them fill out Z
-...
-For some/all of your features, you may choose to reference the specific project files that implement them, although this is entirely optional.
+The feature that I wanted to implement the most was a search bar that would check the database for words that matched the query
+in the database. I had tried this but [MongoDB](MongoDB.com) requires a text index to installed via Mongo Shell but unfortuantely I have been unable to get this done through gitpod.
+I had also tried to use "Full Text Search" through MongoDB but implementing this returned Jinja errors that I was unable to get around
+with the time I had left to play with. 
 
-In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
+I will return to this and install it in a future version. 
 
-Features Left to Implement
-Another feature idea
-Technologies Used
-In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
+
+
+###Technologies Used
+#### Languages
+
+* Python
+* HTML
+* javascript
+* css
+
+#### Frameworks
+* Flask
+* Materialize Css
+
 
 JQuery
 The project uses JQuery to simplify DOM manipulation.
