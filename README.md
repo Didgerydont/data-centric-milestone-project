@@ -466,10 +466,29 @@ I will return to this and install it in a future version.
 * From WTforms.validators - InputRequired, URL, ValidationError
 * From Flask_wtf import FlaskForm
 
-JQuery
-The project uses JQuery to simplify DOM manipulation.
-Testing
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
+### Testing
+The UX was designed using materialize CSS provides an extremely response layout to the page. 
+The page has been tested on all of the following devices and is displaying/functioning correctly. 
+
+##### Large Viewports
+* Lenovo Think Pad T490
+* Macbook Pro
+* IMac
+* HP 250
+
+##### Small Viewports
+* Huawei Y30
+* Samsung a70
+* Samsung s7
+* Iphone SE 
+* Samsung s9 
+* Samsung s5
+* Pixel 2 / XL
+* Iphone 6/7/8
+* Iphone 6/7/8 Plus
+* Iphone X
+* Ipad Pro
+
 
 Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
 
