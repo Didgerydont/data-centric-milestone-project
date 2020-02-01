@@ -87,6 +87,17 @@ wouldnt have worked as the general project had to adapt to code that I was writi
 ![wireframe](https://github.com/Didgerydont/data-centric-milestone-project/blob/master/static/img/data_centric_wireframe_2.JPG "wireframe_2")
 ![wireframe](https://github.com/Didgerydont/data-centric-milestone-project/blob/master/static/img/data_centric_wireframe_3.JPG "wireframe_3")
 
+#### Database Schema
+![schema](https://github.com/Didgerydont/data-centric-milestone-project/blob/master/static/img/data_centric_wireframe_schema.JPG "Schema")
+
+#### Database in Action
+##### Recipes
+![recipes](https://github.com/Didgerydont/data-centric-milestone-project/blob/master/static/img/data_centric_wireframe_recipes.JPG "Recipes")
+
+##### Users
+The login and registration blocks use bcrypt to salt the users passwords for extra security
+![users](https://github.com/Didgerydont/data-centric-milestone-project/blob/master/static/img/data_centric_wireframe_users.JPG "Users")
+
 Features
 In this section, you should go over the different parts of your project, and describe each in a sentence or so.
 
