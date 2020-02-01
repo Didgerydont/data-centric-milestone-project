@@ -1,7 +1,7 @@
-#Recipe Hub - Data Centric Milestone Project
+# Recipe Hub - Data Centric Milestone Project
 The focus of this project is to display the CRUD principle of database orientated software development and design. 
 
-##UX
+## UX
 The goal for the UX of this project was to keep the general layout straightforward and easy to use. 
 Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
 
@@ -45,7 +45,7 @@ in order to provide its back-end functionality.
 The project allows users to login and register to the website. The user is never prompted to make a profile with the website
 unless they try to access a function that allows edits to be made to the database.
 
-##### Registration
+#### Registration
 The site uses WTForms and Flask-Wtf to do the backend of the forms functions. This involves setting up classes and using framework
 to set the up the "username" and "password" fields. 
 
@@ -90,7 +90,7 @@ def register():
 
 
 ```
-##### Login
+#### Login
 The login will take the details that the user has saved earlier. Re-salt them and allow then access if 
 the password and username match
 
@@ -120,7 +120,7 @@ def login_success():
 ```
 
 
-##### Session Cookie
+#### Session Cookie
 The site also makes use of session cookies to remember that the user is logged in in order to access our
 functions that allow alterations to be made to the database. 
 
@@ -146,7 +146,7 @@ def add_recipe():
 ### CRUD
 I have 3 functions that follow this principle.
 
-##### Read Recipe
+#### Read Recipe
 This function reads all of the recipes that have been uploaded to the directory. Its shows all of the
 previously input data. The recipes utilizes the [Materialize css](https://materializecss.com/) frameworks
 built in accordian in order to display the recipes as individual cards. They also uses Materializes built
@@ -240,7 +240,7 @@ javascript to make tiles hover when the cursor is detected within the div.
 
 ```
 
-##### Edit Recipe
+#### Edit Recipe
 The edit recipe function is accessed via the previous read recipe function. This requires the user to be logged in
 by use of a session cookie. The user will be asked to set up a page in order to make the edit. If the user is logged in
 but is trying to edit someones elses recipes. They will be advised that they can only edit their own recipes.
@@ -397,7 +397,7 @@ class editRecipe(FlaskForm):
 {% endblock %}
 ```
 
-##### Delete
+#### Delete
 The delete function is fairly simple. The button is also location on the read recipe page and will delete the users recipe
 once they are logged in. 
 
@@ -455,6 +455,16 @@ I will return to this and install it in a future version.
 * Flask
 * Materialize Css
 
+#### Imports
+* From Pymongo - MongoClient
+* From Flask - render_template, redirect, request, url_for, session, flash
+* From Flask-pymongo - PyMongo
+* From Bson.objectid - ObjectId
+* Bcrypt
+* Datetime
+* From WTforms - StringField, IntegerField, PasswordField, SubmitField, BooleanField, TextAreaField
+* From WTforms.validators - InputRequired, URL, ValidationError
+* From Flask_wtf import FlaskForm
 
 JQuery
 The project uses JQuery to simplify DOM manipulation.
@@ -463,18 +473,7 @@ In this section, you need to convince the assessor that you have conducted enoug
 
 Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
 
-For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
-
-Contact form:
-Go to the "Contact Us" page
-Try to submit the empty form and verify that an error message about the required fields appears
-Try to submit the form with an invalid email address and verify that a relevant error message appears
-Try to submit the form with all inputs valid and verify that a success message appears.
-In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
-
-You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
-
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
+For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as
 
 Deployment
 This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
