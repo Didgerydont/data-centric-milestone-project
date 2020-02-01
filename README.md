@@ -83,9 +83,9 @@ Below are the original wireframes that I drew up before I began working on the p
 the general idea has stayed along the same lines. Albeit, with a few differences. As work began on the project these original plans as the same outline and shape 
 wouldnt have worked as the general project had to adapt to code that I was writing. 
 
-![alt](/static/img/data_centric_wireframe_1.JPG "wireframe_1")
-![alt](/static/img/data_centric_wireframe_2.JPG "wireframe_2")
-![alt](/static/img/data_centric_wireframe_3.JPG "wireframe_3")
+![wireframe](https://github.com/Didgerydont/data-centric-milestone-project/blob/master/static/img/data_centric_wireframe_1.JPG "wireframe_1")
+![wireframe](https://github.com/Didgerydont/data-centric-milestone-project/blob/master/static/img/data_centric_wireframe_2.JPG "wireframe_2")
+![wireframe](https://github.com/Didgerydont/data-centric-milestone-project/blob/master/static/img/data_centric_wireframe_3.JPG "wireframe_3")
 
 Features
 In this section, you should go over the different parts of your project, and describe each in a sentence or so.
