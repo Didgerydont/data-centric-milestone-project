@@ -52,7 +52,7 @@ class editRecipe(FlaskForm):
     recipe_method = TextAreaField('Method', validators=[InputRequired()])
     recipe_ingredients = TextAreaField('Ingredients', validators=[InputRequired()])
     recipe_meal_type = StringField('Meal Type', validators=[InputRequired()])
-    recipe_serves = IntegerField('Serves', validators=[InputRequired()])
+    recipe_serves = Stringfield('Serves', validators=[InputRequired()])
     recipe_preptime = StringField('Preperation',validators=[InputRequired()])
     recipe_cooktime = StringField('Cooking Time', validators=[InputRequired()])
     recipe_origin = StringField('Country of Origin', validators=[InputRequired()])
@@ -78,7 +78,6 @@ def logging_in():
     if user_login:
         if bcrypt.hashpw(request.form['login_password'].encode('utf-8'), user_login['password']) == user_login['password']:
             session['username'] = request.form['login_username']
-            #session['logged_in'] == True          
             return redirect(url_for('login_success'))
 
     return 'Invalid username/password combination'
@@ -186,12 +185,6 @@ def edit_recipe(recipe_id):
     if 'username' in session:
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
         user_recipes = mongo.db.recipes.find({"user_name": session['username']})
-        print("This is a print statment")
-        print(type(user_recipes))
-        print("This is also a new print statment")
-        print(recipe)
-        for value in recipe: 
-            print(value)
         if recipe in user_recipes:
             form = editRecipe(request.form)
             form.recipe_title.data = recipe["title"]
