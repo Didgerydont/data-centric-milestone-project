@@ -495,4 +495,9 @@ I have deployed the project through Heroku. The app is running @ [https://data-f
 
 The file is deployed through Heroku by matching config variables such as IP, PORT, SECRET_KEY and MONGO_URI
 Then we need to make sure that we have a Procfile and requirements.txt file set up so that Heroku knows how to correctly install the project to its servers. 
-My SECRET_KEY and MONGO_URI has been stored as enviroment variables within my project in order to them secret. 
+My SECRET_KEY and MONGO_URI has been stored as enviroment variables within my project in order to them secret.
+
+### Credits
+Although the code in this project has been written by myself. I would like to credit  @ [https://www.youtube.com/channel/UC-QDfvrRIDB6F0bIO4I4HkQ](Pretty Printed) for his great online tutorials which played
+a large role in assisting me through the trickier parts of this project. Particularily whiles learning how to implement Bcrypt and the login system. 
+A big thanks should also go to Code Institute and their fantastic tutors who assisted me throughout the entirety of the project.  
