@@ -496,12 +496,3 @@ I have deployed the project through Heroku. The app is running @ [https://data-f
 The file is deployed through Heroku by matching config variables such as IP, PORT, SECRET_KEY and MONGO_URI
 Then we need to make sure that we have a Procfile and requirements.txt file set up. 
 My SECRET_KEY and MONGO_URI has been stored as enviroment variables within my project in order to them secret. 
-
-
-Credits
-Content
-The text for section Y was copied from the Wikipedia article Z
-Media
-The photos used in this site were obtained from ...
-Acknowledgements
-I received inspiration for this project from X

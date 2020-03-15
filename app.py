@@ -257,28 +257,6 @@ def fatsecret():
    return render_template('fatsecret.html')
 
 
-## Come back to Search, must find another as Mongo shell cant be used on this version of gitpod
-#Searchbar
-@app.route('/search_bar/', methods=["POST"])
-def search_bar():
-    search_term = request.form['search_text']
-    if (search_term != ""):
-        return redirect(url_for('search_results', search_text=search_term))
-    else:
-        return render_template("readrecipe.html", recipe=mongo.db.recipes.find())
-
-@app.route('/search_results/<search_text>', methods=['GET'])
-def search_results(search_text):
-    search_results = mongo.db.recipes.find(
-        {'$text': {'$search': search_text}})
-    return render_template("search_findings.html", recipes=search_results)
-    
-@app.route('/create_index')
-def create_index():
-    created_index = mongo.db.recipes.createIndex({ "$**": "text" })
-
-    return created_index
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0',
             port=(os.environ.get('PORT')),
